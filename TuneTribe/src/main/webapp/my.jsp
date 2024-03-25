@@ -14,7 +14,8 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>myreviewtap</title>
+<title>Mypage</title>
+
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -57,18 +58,107 @@ $(document).ready(function (){
 			for(let i=0;i<res.length;i++){
 				// 태그 내용 담을 변수
 				data +="<p style='display:none'>" + res[i].fes_idx+"<p>";
+				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+                data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+                data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
                 var imgPath = imgroute + res[i].b_file;
-                data += '<br><img src="' + imgPath + '" alt="">';
-				data += "<p>" + res[i].b_content + "</p>";
-                data += "<p>" + res[i].user_id + "</p>";
-                data += "<p>" + res[i].b_likes + "</p>";
-
+                data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+                
+                data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+ 
+				data += "<br><br><hr><br><br>"; // 게시물 구분선
 			} // for 끝
 			$("#postbox").empty();
             $("#postbox").append(data);
         } // reviewlist success 끝
 		
 	}); // reviewlist ajax 끝
+	
+	$(document).ready(function (){
+	    // 댓글 로딩 함수
+	    function loadComments(postId) {
+	    	// var postId = $(this).data('post-id');
+	    	$.ajax({
+	            url: 'CommentListCon',
+	            type: 'GET',
+	            data: { 'b_idx': postId },
+	            dataType: 'json',
+	            success: function(res_cmt) {
+	                var modalContent = '';
+	                
+	                // 댓글들 보이기
+		            for(let j=0; j<res_cmt.length; j++){
+    				modalContent +="<p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
+    				modalContent +="<p style=\"display:none\">" + res_cmt[j].cmt_idx + "</p>";
+    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</p>";
+    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].cmt_content + "</p>";
+    				} // data_cmt 꺼내는 for문 끝
+    				
+    				// 참고용: 이것도 댓글 모두 출력 가능한 문법인 듯
+    				/* res_cmt.forEach(function(cmt) {
+    	                modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + cmt.user_id + ": " + cmt.cmt_content + "</p>";
+    	            }); */
+    				
+	                <!-- 댓글 입력 div 시작 -->
+   					modalContent += '<form id="commentForm">'
+   					modalContent +=	'<div style="display: flex; justify-content: center;">'
+   					modalContent +=	'<input type="hidden" value="${login_vo.user_id }" id="user_id_cmt">'
+   					modalContent +=	'<input type="text" class="commenttext"'
+   					modalContent += 'style="width: 300px; height: 100px;">'
+					<!-- 댓글 작성 버튼 -->
+   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + postId + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
+					<!-- 댓글 입력 div 끝 -->
+   					modalContent += '</div>'
+    				modalContent += '</form>'
+					<!-- 댓글창 닫기 버튼 -->
+    				modalContent += '<button class="close_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Close</button>'
+    				
+    				$('#modalBox').html(modalContent);
+    				
+	                // 모달 박스와 배경을 표시
+	                $('#modalBox').fadeIn(1000);
+	                $('#modalBg').fadeIn(1000);
+	            }
+	        });
+	    }
+	    
+	    // 'Comments' 버튼 클릭 이벤트: 모달창
+	    $(document).on('click', '.cmt_pop_btn', function() {
+	        var postId = $(this).data('post-id');
+	        loadComments(postId); // 댓글 로딩 함수 호출
+	    });
+	    
+		// 'Upload' 버튼 클릭 이벤트: 댓글 업로드
+	    $(document).on('click', '.comment_upload_btn', function() {
+	    	var postId = $(this).data('post-id'); // 이 방식으로 postId 값을 가져옴
+	        var user_id = $('#user_id_cmt').val(); // hidden input 필드의 값
+ 			var commentText = $('.commenttext').val();
+	        
+ 			$.ajax({
+	            url: 'CommentCon',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify({
+	                'b_idx': postId,
+	                'user_id': user_id,
+	                'cmt_content': commentText
+	            }),
+	            success: function(res_cmt){
+                	loadComments(postId);
+	            },
+	            error: function(xhr, status, error){
+	                console.error(error);
+	            }
+	        });
+	    });
+		
+	 	// 모달 닫기 버튼 클릭 이벤트
+	    $(document).on('click', '.close_btn', function() {
+	        $('#modalBox').fadeOut();
+	        $('#modalBg').fadeOut();
+	    });
+	    });
 	
 }) // function 끝
 
@@ -126,11 +216,37 @@ $(document).ready(function (){
 			<!-- navbar 안에 container 3개 넣기! -->
 
 
+			<!-- sidebar starts -->
+
+			<div
+				class="container-px-1 px-lg-2 navbar-inverse"
+				style="width: 300px;">
+				<div class="sidebar" style="width: 300px;">
+
+					<div class="sidebarOption active" align="center">
+						<span class="material-icons text-white mb-3"> home </span>
+						<h5 data-tab="myreviewtap" class="tabmenu text-white mb-3">HOME</h5>
+					</div>
+					<br>
+					<div class="sidebarOption" align="center">
+						<span class="material-icons text-white mb-3"> search </span>
+						<h5 data-tab="fesinfotap" class="tabmenu text-white mb-3">회원정보수정</h5>
+					</div>
+					<br>
+					<div class="sidebarOption" align="center">
+						<span class="material-icons text-white mb-3">
+							notifications_none </span>
+						<h5 data-tab="favchoose" class="tabmenu text-white mb-3">선호도선택</h5>
+					</div>
+					<br>
+				</div>
+			</div>
+			<!-- sidebar ends -->
 
 			<!-- feed start -->
 			<div class="feed"  style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black">
+				<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
 					<h5 class="text-white mb-5" align="center">${login_vo.user_id}</h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
@@ -144,12 +260,14 @@ $(document).ready(function (){
 
 									<div style="display: flex; justify-content: center;">
 										<input type="text" id="reviewtext"
-											style="width: 300px; height: 150px;"> <input
-											type="file" id="file" class="btn btn-primary"
-											style="width: 100px; margin: 0 auto; display: block;">
+											style="width: 400px; height: 150px;">
+									</div>
+									<div>
+										<input type="file" id="file" class="btn btn-primary"
+											style="height: 50px; width: 100px; margin: 0 auto; display: block;">
 
 										<button type="button" id="reviewbtn" value="upload"
-											class="btn btn-primary">작성</button>
+											class="btn btn-primary" style="height: 50px; width: 100px;">작성</button>
 									</div>
 								</form>
 							</div>
@@ -171,6 +289,25 @@ $(document).ready(function (){
 			<!-- feed ends -->
 		</div>
 
+
+
+
+
+
+
+
+
+			<!-- 채팅창 넣는 자리 -->
+			<div class="container-px-1 px-lg-2"
+				style="width: 300px; align-content: right;">
+
+				<div class="widgets__widgetContainer">
+					<h2>채팅창 넣는 자리입니다.</h2>
+				</div>
+			</div>
+		</div>
+
+		</div>
 	</nav>
 	
 	
