@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.db.FestivalMapper">
+
+	<!-- 페스티벌(게시판) 이름 검색 -->
+	<select id="festivalSearch" parameterType="String"
+		resultType="FestivalsVO">
+		SELECT * FROM festivals WHERE fes_name LIKE
+		'%'||#{searchText}||'%'
+	</select>
+
+	<select id="fesinfo" parameterType="int"
+		resultType="FestivalsVO">
+		select * from festivals where fes_idx=#{fes_idx}
+	</select>
+
+	<!-- 페스티벌 일정 임박순 9개만 가져오기 -->
+	<!-- XML에서 특수문자는 사용법이 다름: - &lt; = < - &gt; = > -->
+	<select id="fesOrderAsc" resultType="FestivalsVO">
+		SELECT * FROM (
+		SELECT * FROM
+		festivals WHERE fes_ed_dt >= sysdate ORDER BY FES_ST_DT
+		) WHERE ROWNUM
+		&lt;= 9
+	</select>
+
+
+	<!-- 카운트 점수: 선호 가수 일치도 -->
+	<select id="LoadRecoResult" parameterType="String"
+		resultType="RecommendVO">
+		WITH fav_singer_counts AS (
+		SELECT fes_idx, COUNT(singer_idx) * 50 AS singer_count
+		FROM lineups
+		WHERE singer_idx IN (
+		SELECT fav_singer
+		FROM users_fav_singer
+		WHERE user_id = #{user_id}
+		)
+		GROUP BY fes_idx
+		),
+		fav_genre_counts AS (
+		SELECT l.fes_idx, COUNT(l.singer_idx) AS singer_count
+		FROM lineups l
+		JOIN singers s ON l.singer_idx = s.singer_idx
+		JOIN users_fav_genre fg ON s.singer_genre = fg.fav_genre
+		WHERE fg.user_id = #{user_id}
+		GROUP BY l.fes_idx
+		)
+		SELECT
+		#{user_id} AS user_id,
+		f.fes_idx,
+		COALESCE(fav_singer_counts.singer_count, 0) + COALESCE(fav_genre_counts.singer_count, 0) AS reco_score
+		FROM
+		festivals f
+		LEFT JOIN fav_singer_counts ON f.fes_idx = fav_singer_counts.fes_idx
+		LEFT JOIN fav_genre_counts ON f.fes_idx = fav_genre_counts.fes_idx
+		ORDER BY reco_score DESC
+		<!-- WITH fav_singer_counts AS ( SELECT fes_idx, COUNT(singer_idx) * 50 
+			AS singer_count FROM lineups WHERE singer_idx IN ( SELECT fav_singer FROM 
+			users_fav_singer WHERE user_id = #{user_id} ) GROUP BY fes_idx ), fav_genre_counts 
+			AS ( SELECT l.fes_idx, COUNT(l.singer_idx) AS singer_count FROM lineups l 
+			JOIN singers s ON l.singer_idx = s.singer_idx JOIN users_fav_genre fg ON 
+			s.singer_genre = fg.fav_genre WHERE fg.user_id = #{user_id} GROUP BY l.fes_idx 
+			) SELECT f.fes_idx, COALESCE(fav_singer_counts.singer_count, 0) + COALESCE(fav_genre_counts.singer_count, 
+			0) AS reco_score FROM festivals f LEFT JOIN fav_singer_counts ON f.fes_idx 
+			= fav_singer_counts.fes_idx LEFT JOIN fav_genre_counts ON f.fes_idx = fav_genre_counts.fes_idx 
+			order by reco_score desc -->
+	</select>
+
+	<delete id="emptyRecoTable" parameterType="String">
+		delete from
+		reco_festivals where user_id=#{user_id}
+	</delete>
+
+	<insert id="saveRecoResult" parameterType="RecommendVO">
+		insert into
+		reco_festivals values(#{user_id}, #{fes_idx},#{reco_score})
+	</insert>
+
+
+
+	<select id="recofesMain" parameterType="String"
+		resultType="FestivalsVO">
+		SELECT *
+		FROM festivals
+		WHERE fes_idx IN (
+		SELECT fes_idx
+		FROM
+		(
+		SELECT fes_idx, ROWNUM AS rn
+		FROM (
+		SELECT fes_idx
+		FROM reco_festivals
+		where user_id= #{user_id}
+		ORDER BY reco_score DESC
+		)
+		)
+		WHERE rn &lt;= 3
+		)
+	</select>
+
+	<!-- 페스티벌 랜덤으로 3개 가져오기 -->
+	<select id="fesRandom" resultType="FestivalsVO">
+	  <![CDATA[ 
+	    SELECT *
+	    FROM (
+	      SELECT *
+	      FROM festivals
+	      WHERE fes_ed_dt >= SYSDATE
+	      ORDER BY DBMS_RANDOM.VALUE
+	    )
+	    WHERE ROWNUM <= 3
+	  ]]>
+	</select>
+
+
+</mapper>

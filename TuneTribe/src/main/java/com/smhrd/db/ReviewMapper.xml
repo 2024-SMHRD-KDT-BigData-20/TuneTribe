@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smhrd.db.ReviewMapper">
+
+	<insert id="write" parameterType="ReviewVO">
+		insert into board values(idx_board.nextval,#{b_content},#{b_file},sysdate,0,#{user_id},#{fes_idx})
+	</insert>
+	
+	<select id="reviewlist" parameterType="int" resultType="ReviewVO">
+		select * from board where fes_idx=#{fes_idx} order by b_idx desc
+	</select>
+	
+	<select id="myreviewlist" parameterType="String" resultType="ReviewVO">
+		select * from board where fes_idx = 999 and user_id = #{user_id} order by b_idx desc
+	</select>
+	
+	<!-- 해당 게시글의 댓글 작성 -->
+	<insert id="writeComment" parameterType="CommentVO">
+		insert into comments values(idx_cmt.nextval, #{b_idx}, #{cmt_content}, #{user_id}, sysdate)
+	</insert>
+	
+	<!-- 해당 게시글의 댓글 가져오기 -->
+	<select id="commentList" parameterType="int" resultType="CommentVO">
+		select * from comments where b_idx=#{b_idx} order by cmt_idx desc
+	</select>
+	
+	<parameterMap id="map" type="map">
+    	<parameter property="b_content" jdbcType="VARCHAR"/>
+	</parameterMap>
+	
+	
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.smhrd.db.SingersMapper">
+
+	<select id = "lineuplist" parameterType="int" resultType="String">
+		select distinct s.singer_name from singers s inner join lineups l on(s.singer_idx=l.singer_idx) where fes_idx=#{fes_idx}
+	</select>
+	
+	<select id="singerlist" resultType="String">
+		select distinct singer_name from singers order by singer_name
+	</select>
+	
+	<select id="genrelist" resultType="String">
+		select distinct singer_genre from singers order by singer_genre
+	</select>
+	
+	<select id="indexlist" resultType="int">
+		select distinct singer_idx from singers where singer_name=#{singer_name}
+	</select>
+	
+	<delete id="singerdelete">
+		delete from users_fav_singer where user_id = #{user_id}
+	</delete>
+	
+	<insert id="singerinsert" parameterType="com.smhrd.model.FavVO">
+		insert into users_fav_singer values (#{user_id}, #{fav_singer})
+	</insert>
+	
+	<delete id="genredelete">
+		delete from users_fav_genre where user_id =#{user_id}
+	</delete>
+	
+	<insert id="genreinsert" parameterType="com.smhrd.model.FavVO">
+		insert into users_fav_genre values (#{user_id}, #{fav_genre})
+		
+	</insert>
+	
+	
+</mapper>
