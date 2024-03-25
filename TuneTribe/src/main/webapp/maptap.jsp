@@ -15,7 +15,9 @@ System.out.println(location);
 
 </head>
 <body>
-<div class="container-fluid bg-black" align="center">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7fbefea330e06321fdff2b98d636e834&libraries=services"></script>
+
+<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
 	<h5 class="text-white mb-3" align="center"><%=fes_Name %></h5>
 	<h5 class="text-white mb-3" align="center"><%=location %></h5>
 	<br>
@@ -24,8 +26,6 @@ System.out.println(location);
 </div>
 
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7fbefea330e06321fdff2b98d636e834&libraries=services"></script>
 
 	<script>
 			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다

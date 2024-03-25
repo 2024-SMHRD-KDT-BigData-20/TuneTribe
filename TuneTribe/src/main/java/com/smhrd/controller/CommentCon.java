@@ -19,6 +19,7 @@ public class CommentCon extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("[CommentCon]");
+		request.setCharacterEncoding("UTF-8");
 
 		/*
 		 * JSON.stringify ( ) - 객체를 JSON 문자열로 변환 (직렬화, JS 객체 -> 문자열)
@@ -32,10 +33,12 @@ public class CommentCon extends HttpServlet {
 			sb.append(line);
 		}
 		String requestData = sb.toString();
+		System.out.println("[CommentCon] requestData: " + requestData);
 
 		// Gson을 사용하여 JSON 문자열 파싱
 		Gson gson = new Gson();
 		CommentVO comment = gson.fromJson(requestData, CommentVO.class);
+		System.out.println("[CommentCon] comment: " + comment);
 
 		// 파싱된 데이터 사용
 		int b_idx = comment.getB_idx();
@@ -43,6 +46,7 @@ public class CommentCon extends HttpServlet {
 		String cmt_content = comment.getCmt_content();
 
 		CommentVO commentVO = new CommentVO(b_idx, cmt_content, user_id);
+		System.out.println("[CommentCon] 파싱된 CommentVO: " + commentVO);
 
 		int cnt = new CommentDAO().writeComment(commentVO);
 

@@ -45,7 +45,7 @@ System.out.print("fes_idx =" + fes_idx);
 						data += "<p class=\"text-white mb-3\" align=\"center\">" + res.fes_st_dt + " ~ ";
 						data += res.fes_ed_dt + "</p>";
 						var imgPath = imgroute + res.fes_poster;
-						data += '<img src="' + imgPath + '" alt="" style:"width=300px; height=500px">';
+						data += '<img src="' + imgPath + '" alt="" style="width=300px; height=500px; display: block; margin-left: auto; margin-right: auto;" align="center">';
 						$("#feed").append(data);
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
@@ -60,9 +60,9 @@ System.out.print("fes_idx =" + fes_idx);
 <body>
 
 		<!-- feed start -->
-		<div class="container-fluid bg-black" align="center">
+		<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
 
-			<div class="feed" id="feed"></div>
+			<div class="feed"  style="width: 600px;" id="feed"></div>
 		</div>
 		<!-- feed ends -->
 
