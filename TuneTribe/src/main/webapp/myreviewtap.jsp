@@ -92,17 +92,16 @@ $(document).ready(function (){
 			<!-- navbar 안에 container 3개 넣기! -->
 
 
-
 			<!-- feed start -->
 			<div class="feed"  style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black">
+				<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
 					<h5 class="text-white mb-5" align="center">${login_vo.user_id}</h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
 
-						<!-- 리뷰적는 곳 시작 -->
 						<div class="text-center">
+						<!-- 리뷰적는 곳 시작 -->
 							<div class="reviewbox">
 								<form id="uploadForm" enctype="multipart/form-data">
 									<input type="hidden" value="${login_vo.user_id }" id="user_id">
@@ -110,33 +109,40 @@ $(document).ready(function (){
 
 									<div style="display: flex; justify-content: center;">
 										<input type="text" id="reviewtext"
-											style="width: 300px; height: 150px;"> <input
-											type="file" id="file" class="btn btn-primary"
-											style="width: 100px; margin: 0 auto; display: block;">
+											style="width: 400px; height: 150px;">
+									</div>
+									<div>		
+										<input type="file" id="file" class="btn btn-primary"
+											style="height: 50px; width: 100px; margin: 0 auto; display: block;">
 
 										<button type="button" id="reviewbtn" value="upload"
-											class="btn btn-primary">작성</button>
+											class="btn btn-primary" style="height: 50px; width: 100px;">작성</button>
 									</div>
 								</form>
 							</div>
-							<!-- 리뷰적는 곳 끝 -->
+						<!-- 리뷰적는 곳 끝 -->
 
 
-			<br>
+							<p>
+								<br> <br>
+							</p>
+
 
 							<!-- 리뷰목록 시작 -->
-							<div class="postbox" id="postbox"></div>
+							<div class="container-fluid bg-dark postbox" id="postbox">
 							
-							
-							
+							</div>			
 							<!-- 리뷰목록 끝 -->
 						</div>
 					</section>
 				</div>
 			</div>
 			<!-- feed ends -->
-		</div>
 
+
+
+	
+		</div>
 	</nav>
 	
 	

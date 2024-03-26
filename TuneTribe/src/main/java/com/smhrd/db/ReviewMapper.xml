@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="myreviewlist" parameterType="String" resultType="ReviewVO">
-		select * from board where fes_idx = 999 and user_id = #{user_id} order by b_idx desc
+		select * from board where user_id = #{user_id} order by b_idx desc
 	</select>
 	
 	<!-- 해당 게시글의 댓글 작성 -->

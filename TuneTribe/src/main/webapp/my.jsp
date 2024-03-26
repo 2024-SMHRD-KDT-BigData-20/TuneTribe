@@ -53,19 +53,19 @@ $(document).ready(function (){
         dataType: 'json', // 응답 데이터 타입
         success: function(res){
         	console.log(res); //json
-			let data="";
+			let dataa="";
 			for(let i=0;i<res.length;i++){
 				// 태그 내용 담을 변수
-				data +="<p style='display:none'>" + res[i].fes_idx+"<p>";
+				dataa +="<p style='display:none'>" + res[i].fes_idx+"<p>";
                 var imgPath = imgroute + res[i].b_file;
-                data += '<br><img src="' + imgPath + '" alt="">';
-				data += "<p>" + res[i].b_content + "</p>";
-                data += "<p>" + res[i].user_id + "</p>";
-                data += "<p>" + res[i].b_likes + "</p>";
+                dataa += '<br><img src="' + imgPath + '" alt="">';
+				dataa += "<p>" + res[i].b_content + "</p>";
+                dataa += "<p>" + res[i].user_id + "</p>";
+                dataa += "<p>" + res[i].b_likes + "</p>";
 
 			} // for 끝
 			$("#postbox").empty();
-            $("#postbox").append(data);
+            $("#postbox").append(dataa);
         } // reviewlist success 끝
 		
 	}); // reviewlist ajax 끝
@@ -107,7 +107,7 @@ $(document).ready(function (){
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="searchResult.jsp"> <span
 							class="material-symbols-outlined">search</span>
-					</a></li>log
+					</a></li>
 					<li class="nav-item"><a class="nav-link" href="LogoutCon"> <span
 							class="material-symbols-outlined"> logout </span>
 					</a></li>
@@ -128,8 +128,7 @@ $(document).ready(function (){
 
 			<!-- sidebar starts -->
 
-			<div
-				class="container-px-1 px-lg-2 navbar-inverse"
+			<div class="container-px-1 px-lg-2 navbar-inverse"
 				style="width: 300px;">
 				<div class="sidebar" style="width: 300px;">
 
@@ -148,21 +147,20 @@ $(document).ready(function (){
 							notifications_none </span>
 						<h5 data-tab="favchoose" class="tabmenu text-white mb-3">선호도선택</h5>
 					</div>
-					<br>
 				</div>
 			</div>
 			<!-- sidebar ends -->
 
 			<!-- feed start -->
-			<div class="feed" id="feed" style="padding-top: 500px;">
+			<div class="feed"  style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black">
+				<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
 					<h5 class="text-white mb-5" align="center">${login_vo.user_id}</h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
 
-						<!-- 리뷰적는 곳 시작 -->
 						<div class="text-center">
+						<!-- 리뷰적는 곳 시작 -->
 							<div class="reviewbox">
 								<form id="uploadForm" enctype="multipart/form-data">
 									<input type="hidden" value="${login_vo.user_id }" id="user_id">
@@ -170,38 +168,35 @@ $(document).ready(function (){
 
 									<div style="display: flex; justify-content: center;">
 										<input type="text" id="reviewtext"
-											style="width: 300px; height: 150px;"> <input
-											type="file" id="file" class="btn btn-primary"
-											style="width: 100px; margin: 0 auto; display: block;">
+											style="width: 400px; height: 150px;">
+									</div>
+									<div>		
+										<input type="file" id="file" class="btn btn-primary"
+											style="height: 50px; width: 100px; margin: 0 auto; display: block;">
 
 										<button type="button" id="reviewbtn" value="upload"
-											class="btn btn-primary">작성</button>
+											class="btn btn-primary" style="height: 50px; width: 100px;">작성</button>
 									</div>
 								</form>
 							</div>
-							<!-- 리뷰적는 곳 끝 -->
+						<!-- 리뷰적는 곳 끝 -->
 
 
-			<br>
+							<p>
+								<br> <br>
+							</p>
+
 
 							<!-- 리뷰목록 시작 -->
-							<div class="postbox" id="postbox"></div>
+							<div class="container-fluid bg-dark postbox" id="postbox">
 							
-							
-							
+							</div>			
 							<!-- 리뷰목록 끝 -->
 						</div>
 					</section>
 				</div>
 			</div>
 			<!-- feed ends -->
-		</div>
-
-
-
-
-
-
 
 
 
@@ -213,8 +208,6 @@ $(document).ready(function (){
 					<h2>채팅창 넣는 자리입니다.</h2>
 				</div>
 			</div>
-		</div>
-
 		</div>
 	</nav>
 	

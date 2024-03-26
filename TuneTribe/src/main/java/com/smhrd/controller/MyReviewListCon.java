@@ -19,9 +19,9 @@ public class MyReviewListCon extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("[ReviewListCon]");
+		System.out.println("[MyReviewListCon]");
 		String user_id = request.getParameter("user_id");
-
+		
 		ReviewDAO dao = new ReviewDAO();
 		List<ReviewVO> myreviewlist = dao.myreviewlist(user_id);
 		
