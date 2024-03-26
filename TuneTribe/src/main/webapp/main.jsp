@@ -171,9 +171,9 @@
 
 
 	<!-- more-->
-	<section class="projects-section bg-light">
+	<section class="projects-section bg-black">
 		<br id="more">
-		<h1 align="center">More Festivals</h1>
+		<h1 align="center" style="color:white;">More Festivals</h1>
 
 		<!-- 페스티벌 임박순 정렬 div - 1행 -->
 		<br>
@@ -238,7 +238,7 @@
 		<br> <br>
 	</section>
 	<!-- search-->
-	<section class="search-section" id="search">
+	<section class="search-section bg-black" id="search">
 		<div class="container px-4 px-lg-5">
 			<div class="row gx-4 gx-lg-5">
 				<div class="col-md-10 col-lg-8 mx-auto text-center">
