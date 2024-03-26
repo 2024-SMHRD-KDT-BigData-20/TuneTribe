@@ -53,19 +53,28 @@ $(document).ready(function (){
         dataType: 'json', // 응답 데이터 타입
         success: function(res){
         	console.log(res); //json
-			let dataa="";
+			// 태그 내용 담을 변수
+			let data="";
 			for(let i=0;i<res.length;i++){
-				// 태그 내용 담을 변수
-				dataa +="<p style='display:none'>" + res[i].fes_idx+"<p>";
-                var imgPath = imgroute + res[i].b_file;
-                dataa += '<br><img src="' + imgPath + '" alt="">';
-				dataa += "<p>" + res[i].b_content + "</p>";
-                dataa += "<p>" + res[i].user_id + "</p>";
-                dataa += "<p>" + res[i].b_likes + "</p>";
+				data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+				
+				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+				
+				var imgPath = imgroute + res[i].b_file;
+				// img-fluid 클래스: 반응형
+				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+ 
+				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
 
 			} // for 끝
 			$("#postbox").empty();
-            $("#postbox").append(dataa);
+            $("#postbox").append(data);
         } // reviewlist success 끝
 		
 	}); // reviewlist ajax 끝
@@ -249,11 +258,21 @@ $(document).ready(function (){
             			let data="";
             			for(let i=0;i<res.length;i++){
             				// 태그 내용 담을 변수
-                            var imgPath = imgroute + res[i].b_file;
-                            data += '<br><img src="' + imgPath + '" alt="">';
-            				data += "<p>" + res[i].b_content + "</p>";
-                            data += "<p>" + res[i].user_id + "</p>";
-                            data += "<p>" + res[i].b_likes + "</p>";
+                            data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+							
+            				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+            				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+            				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+            				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+            				
+            				var imgPath = imgroute + res[i].b_file;
+            				// img-fluid 클래스: 반응형
+            				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+            				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+            				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+             
+            				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
 
             			} // for 끝
             			$("#postbox").empty();
