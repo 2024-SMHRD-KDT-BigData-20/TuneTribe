@@ -43,7 +43,7 @@ public class ReviewCon extends HttpServlet {
                     	System.out.println("파일처리");
                         b_file = uuid.toString()+"_"+ new File(item.getName()).getName();
                         System.out.println(b_file);
-                        item.write(new File("C:\\Users\\smart\\git\\TuneTribe\\TuneTribe\\src\\main\\webapp\\img" + File.separator + b_file));
+                        item.write(new File("C:/Users/smart/git/TuneTribe/TuneTribe/src/main/webapp/img" + File.separator + b_file));
                     } else {
                         // 텍스트 데이터 처리
                     	System.out.println("텍스트처리");
@@ -66,12 +66,12 @@ public class ReviewCon extends HttpServlet {
                         // 예: 데이터베이스에 저장하는 로직 구현
                     }
                 }
-                System.out.println(b_content);
+
                 ReviewVO reviewvo = new ReviewVO(b_content,b_file,user_id,fes_idx);
                 ReviewDAO dao = new ReviewDAO();
                 int cnt = 0;
                 cnt = dao.reviewWrite(reviewvo);
-                System.out.println(cnt);
+                System.out.println("cnt값 "+cnt);
                 
                 System.out.println(b_content);
                 // 응답 메시지

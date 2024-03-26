@@ -45,7 +45,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 <script>
 $(document).ready(function (){
 	var user_id = "${login_vo.user_id}"
-	var imgroute = "/tomcatImg/"
+	var imgroute = "./img/"
 	$.ajax({
 		url : 'MyReviewListCon',
 		type : 'get',
@@ -177,7 +177,7 @@ $(document).ready(function (){
             processData: false,
             success: function myreviewlist(){
             	var user_id = "${login_vo.user_id}"
-            	var imgroute = "/tomcatImg/"
+            	var imgroute = "./img/"
             	$.ajax({
             		url : 'MyReviewListCon',
             		type : 'get',
@@ -207,6 +207,8 @@ $(document).ready(function (){
             			} // for 끝
             			$("#postbox").empty();
                         $("#postbox").append(data);
+                        $("#reviewtext").val(""); // 텍스트 필드 초기화
+                        $("#file").val(""); // 파일 입력 필드 초기화
                     } // reviewlist success 끝
             		
             	}); // myreviewlist ajax 끝
