@@ -201,7 +201,8 @@ $(document).ready(function (){
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
 		id="mainNav">
-		<div class="container-fluid" style="display: flex; width: 80%; padding-left: 50px; padding-right: 50px;">
+		<div class="container-fluid"
+			style="display: flex; width: 80%; padding-left: 50px; padding-right: 50px;">
 			<a class="navbar-brand" href="main.jsp"><h2>TuneTribe Logo</h2></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
@@ -209,17 +210,19 @@ $(document).ready(function (){
 				aria-label="Toggle navigation" style="align-self: flex-start;">
 				Menu <i class="fas fa-bars"></i>
 			</button>
-			
-			<div class="collapse navbar-collapse" id="navbarResponsive" style="justify-content: flex-end;">
+
+			<div class="collapse navbar-collapse" id="navbarResponsive"
+				style="justify-content: flex-end;">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item"><a class="nav-link" href="my.jsp"> <span
 							class="material-symbols-outlined">person</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="searchResult.jsp"> <span
+					<li class="nav-item"><a class="nav-link"
+						href="searchResult.jsp"> <span
 							class="material-symbols-outlined">search</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="LogoutCon"> <span
-							class="material-symbols-outlined"> logout </span>
+					<li class="nav-item"><a class="nav-link" href="LogoutCon">
+							<span class="material-symbols-outlined"> logout </span>
 					</a></li>
 				</ul>
 			</div>
@@ -261,9 +264,10 @@ $(document).ready(function (){
 			<!-- sidebar ends -->
 
 			<!-- feed start -->
-			<div class="feed"  style="width: 600px;" id="feed">
+			<div class="feed" style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
+				<div class="container-fluid bg-black" style="padding-top: 300px;"
+					align="center">
 					<h5 class="text-white mb-5" align="center"><%=fes_Name%></h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
@@ -427,7 +431,7 @@ $(document).ready(function (){
             processData: false,
             success: function reviewlist(){
                	var fes_idx = $('#fes_idx').val();
-           		var imgroute = "/tomcatImg/"
+           		var imgroute = "./img/"
            		$.ajax({
            			url : 'ReviewListCon',
            			type : 'get',
@@ -437,13 +441,23 @@ $(document).ready(function (){
           	        	console.log(res); //json
    						let data="";
        					for(let i=0;i<res.length;i++){
-       						// 태그 내용 담을 변수
-       						data += "<p>" + res[i].b_content + "</p>";
-       		                data += "<p>" + res[i].user_id + "</p>";
-       		                data += "<p>" + res[i].b_likes + "</p>";
-       		                var imgPath = imgroute + res[i].b_file;
-       		                data += '<img src="' + imgPath + '" alt="">';
-       					} // for 끝
+       						data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+							
+       						data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+       						data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+       						data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+       						data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+       										
+       						var imgPath = imgroute + res[i].b_file;
+       						// img-fluid 클래스: 반응형
+       						data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+       						data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+       						data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+       						 
+       						data += "<br><br><hr><br><br>"; // 게시물 구분선
+
+       						} // for 끝
        					$("#postbox").empty();
    		                $("#postbox").append(data);
    		                $("#reviewtext").val(""); 

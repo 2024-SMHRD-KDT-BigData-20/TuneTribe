@@ -1,5 +1,7 @@
 package com.smhrd.model;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -30,6 +32,14 @@ public class UsersDAO {
 	public int infoupdate(UsersVO vo) {
 		SqlSession session = sqlSessionFactory.openSession(true);
 		int cnt = session.update("com.smhrd.db.MemberMapper.update", vo);
+		session.close();
+		return cnt;
+	}
+	
+	// 아이디 중복확인
+	public int checkExistUserId(String user_id){
+		SqlSession session = sqlSessionFactory.openSession(true);
+		int cnt = session.selectOne("com.smhrd.db.MemberMapper.checkExistUserId", user_id);
 		session.close();
 		return cnt;
 	}

@@ -45,7 +45,7 @@
 							<label for="user_id">ID</label> <input type="text" name="user_id" />
 						</div>
 						<div class="field">
-							<label for="user_pw">PW</label> <input type="text" name="user_pw"/>
+							<label for="user_pw">PW</label> <input type="text" name="user_pw" />
 						</div>
 					</div>
 					<ul class="actions">
@@ -62,15 +62,19 @@
 					<div class="fields">
 						<div class="field">
 							<label for="user_id">ID</label> <input type="text" name="user_id"
-								id="user_id" />
+								id="user_id" oninput="checkId()" />
+							<!-- id ajax 중복체크 -->
+							<span class="id_ok" style="display: none;">사용 가능한 아이디입니다.</span>
+							<span class="id_already" style="display: none;">누군가 이 아이디를
+								사용하고 있어요.</span>
 						</div>
 						<div class="field">
 							<label for="user_pw">PW</label> <input type="password"
 								name="user_pw" id="user_pw" />
 						</div>
 						<div class="field">
-							<label for="user_pw_confirm">CONFIRM PW</label> <input type="password"
-								name="user_pw_confirm" id="user_pw_confirm" />
+							<label for="user_pw_confirm">CONFIRM PW</label> <input
+								type="password" name="user_pw_confirm" id="user_pw_confirm" />
 						</div>
 						<div class="field">
 							<label for="user_nick">NICKNAME</label> <input type="text"
@@ -115,22 +119,51 @@
 	<script src="assets/js/main.js"></script>
 
 	<script>
-	$(document).ready(function() {
-	    // 폼 제출 시 실행
-	    $("#join_form").submit(function(event) {
-	        // user_pw 및 user_pw_confirm 필드의 값을 가져옴
-	        var password = $("#user_pw").val();
-	        var confirmPassword = $("#user_pw_confirm").val();
+		// 로그인 시 아이디와 비밀번호가 맞는지 확인
+		$(document).ready(function() {
+			// 폼 제출 시 실행
+			$("#join_form").submit(function(event) {
+				// user_pw 및 user_pw_confirm 필드의 값을 가져옴
+				var password = $("#user_pw").val();
+				var confirmPassword = $("#user_pw_confirm").val();
 
-	        // 두 비밀번호가 일치하는지 확인
-	        if(password != confirmPassword) {
-	            // 일치하지 않으면 사용자에게 알림
-	            alert("Passwords do not match.");
-	            // 폼 제출 방지
-	            event.preventDefault();
-	        }
-	    });
-	});
+				// 두 비밀번호가 일치하는지 확인
+				if (password != confirmPassword) {
+					// 일치하지 않으면 사용자에게 알림
+					alert("Passwords do not match.");
+					// 폼 제출 방지
+					event.preventDefault();
+				}
+			});
+		});
+
+		// 회원가입 시 아이디 중복확인
+		function checkId() {
+			var user_id = $('#user_id').val(); //id값이 "id"인 입력란의 값을 저장
+			$.ajax({
+				url : 'IdConfirmCheck', //Controller에서 요청 받을 주소
+				type : 'post', //POST 방식으로 전달
+				data : {
+					user_id : user_id
+				},
+				success : function(cnt) { //컨트롤러에서 넘어온 cnt값을 받는다 
+					if (cnt == 0) { //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+						$('.id_ok').css("display", "inline-block");
+						$('.id_already').css("display", "none");
+					} else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+						$('.id_already').css("display", "inline-block");
+						$('.id_ok').css("display", "none");
+						alert("아이디를 다시 입력해주세요");
+						$('#user_id').val();
+					}
+				},
+				error : function() {
+					alert("에러입니다");
+				}
+			});
+		};
+
+		// 회원가입 시 비밀번호 확인
 	</script>
 
 

@@ -33,7 +33,7 @@ public class LoginCon extends HttpServlet {
 		if(login_vo!=null) {
 			// 로그인 성공, 세션에 값 저장하기
 			HttpSession session = request.getSession();
-			session.setAttribute("login_vo", login_vo); 
+			session.setAttribute("login_vo", login_vo);
 			
 			// 포워드 방식
 			RequestDispatcher rd = request.getRequestDispatcher("main.jsp");

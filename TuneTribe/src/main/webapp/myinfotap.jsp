@@ -80,22 +80,28 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 
 <script>
 $("#logincheckbtn").click(function(){
-	var logindata={
-			user_id : $("#user_id").val(),
-			user_pw : $("#user_pw").val(),
-	};
+	var logindata = JSON.stringify({
+        user_id: $("#user_id").val(),
+        user_pw: $("#user_pw").val(),
+    });
 	console.log(logindata);
 	$.ajax({
 		url:"LoginCheckCon",
 		type:"post",
 		data:logindata,
-		success:function(){
-			console.log("로그인확인!");
+		contentType: 'application/json',
+		dataType: 'json',
+		success:function(login_vo){
+			if(login_vo != null){
 			$("#signup").show();
+			console.log("로그인확인!");
+			console.log(login_vo);
+			}
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-            console.log('tab failed: ' + textStatus + ' ' + errorThrown);
-            alert("로그인확인실패!");
+			console.log('Error: ' + textStatus + ' ' + errorThrown);
+		    console.log(jqXHR.responseText); // 서버 응답 텍스트를 로그로 출력
+		    alert("로그인 확인 실패!");
         }
 	});
 });
