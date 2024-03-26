@@ -30,6 +30,9 @@ public class DeleteCon extends HttpServlet {
 		if(cnt==0) {
 			System.out.println("삭제 실패");
 		}
+		
+		
+		
 	}
 
 }
