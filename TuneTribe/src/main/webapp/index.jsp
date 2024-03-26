@@ -10,6 +10,53 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+
+
+<style type="text/css">
+.russo-one-regular {
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.inner {
+font-family: "Russo One", sans-serif;
+}
+
+.image-box {
+width: 60%;
+height: 60%;
+overflow: hidden;
+margin: 0 auto;
+}
+.image-thumbnail {
+width: width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+#wrapper {
+width: 100%;
+height: 100%;
+postion: relative;
+}
+#wrapper::before {
+width: 100%;
+height: 100%;
+content: "";
+background: url("./assets/img/index_festival.jpeg");
+background-size: cover;
+position: absolute;
+top:0px;
+left:0px;
+z-index: -1;
+opacity: 0.5;
+}
+</style>
+
+
 </head>
 <body class="is-preload">
 
@@ -19,7 +66,7 @@
 		<!-- Header -->
 		<header id="header">
 			<div class="logo">
-				<span class="icon fa-gem"> </span>
+				<i class="fas fa-music"></i>
 			</div>
 			<div class="content">
 				<div class="inner">
@@ -33,6 +80,7 @@
 				</ul>
 			</nav>
 		</header>
+		<!-- </div> -->
 
 		<!-- Main -->
 		<div id="main">
@@ -164,6 +212,7 @@
 		};
 
 		// 회원가입 시 비밀번호 확인
+		
 	</script>
 
 
