@@ -45,7 +45,7 @@ System.out.print("fes_idx =" + fes_idx);
 						data += "<p class=\"text-white mb-3\" align=\"center\">" + res.fes_st_dt + " ~ ";
 						data += res.fes_ed_dt + "</p>";
 						var imgPath = imgroute + res.fes_poster;
-						data += '<img src="' + imgPath + '" alt="" style="width=300px; height=500px; display: block; margin-left: auto; margin-right: auto;" align="center">';
+						data += '<img src="' + imgPath + '" alt="" width="400" height="600" style="display: block; margin-left: auto; margin-right: auto;" align="center">';
 						$("#feed").append(data);
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
