@@ -1,4 +1,3 @@
-<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="com.smhrd.model.FestivalsVO"%>
 <%@page import="com.smhrd.model.UsersVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -141,7 +140,7 @@ $(document).ready(function (){
 					<br>
 					<div class="sidebarOption" align="center">
 						<span class="material-icons text-white mb-3"> search </span>
-						<h5 data-tab="fesinfotap" class="tabmenu text-white mb-3">회원정보수정</h5>
+						<h5 data-tab="myinfotap" class="tabmenu text-white mb-3">회원정보수정</h5>
 					</div>
 					<br>
 					<div class="sidebarOption" align="center">
