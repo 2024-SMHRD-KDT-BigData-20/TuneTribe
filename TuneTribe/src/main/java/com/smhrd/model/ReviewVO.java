@@ -28,6 +28,13 @@ public class ReviewVO {
 		this.fes_idx = fes_idx;
 	}
 	
+	// 게시글삭제용
+	public ReviewVO(String b_idx, String user_id) {
+		super();
+		this.b_idx = b_idx;
+		this.user_id = user_id;
+	}
+	
 	
 	
 }

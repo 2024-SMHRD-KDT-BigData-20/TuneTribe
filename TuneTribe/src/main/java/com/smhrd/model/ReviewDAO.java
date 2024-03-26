@@ -34,4 +34,14 @@ public class ReviewDAO {
 		return myreviewlist;
 	}
 	
+	
+	public int deletereview(ReviewVO vo) {
+		int cnt=0;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		cnt = session.delete("com.smhrd.db.ReviewMapper.deletereview", vo);
+		session.close();
+		return cnt;
+	}
+	
+	
 }

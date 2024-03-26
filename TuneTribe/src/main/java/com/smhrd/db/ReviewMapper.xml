@@ -27,6 +27,13 @@
 		select * from comments where b_idx=#{b_idx} order by cmt_idx desc
 	</select>
 	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deletereview" parameterType="ReviewVO">
+		delete from board where b_idx=#{b_idx} and user_id=#{user_id}
+	</delete>
+	
+	
 	<parameterMap id="map" type="map">
     	<parameter property="b_content" jdbcType="VARCHAR"/>
 	</parameterMap>
