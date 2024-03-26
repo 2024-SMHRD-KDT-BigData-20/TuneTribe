@@ -98,9 +98,8 @@
 					<div class="row gx-4 gx-lg-5">
 						<%
 						int i = 0;
-
+						int j = 0;
 						if (fesList != null) {
-
 							for (FestivalsVO f : fesList) {
 								i++;
 						%>
@@ -128,8 +127,8 @@
 											~
 											<%=f.getFes_ed_dt()%></div>
 									</div>
+								</a>
 							</div>
-							</a>
 						</div>
 						<%
 						if (i % 3 == 0) {
@@ -137,15 +136,15 @@
 						<p>
 							<br> <br>
 						</p>
-					</div>
 					<%
-					}
-					}
+						}
+					} // for문 끝
 					} else {
 					// 출력 안되니 자바스크립트로 어떻게 해보기!!!!!!!!!!!!
 					out.print("Results not found");
 					}
 					%>
+					</div>
 
 
 
