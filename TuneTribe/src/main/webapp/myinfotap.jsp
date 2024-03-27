@@ -20,8 +20,6 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href="assets/css/styles.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/main.css" />
-
 </head>
 <body>
 	<article id="signin">

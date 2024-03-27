@@ -460,9 +460,9 @@ $(document).ready(function (){
 			<!-- sidebar ends -->
 
 			<!-- feed start -->
-			<div class="feed" style="width: 600px;" id="feed">
+			<div class="feed" style="width: 600px; padding-top: 150px;" id="feed">
 
-				<div class="container-fluid bg-black" style="padding-top: 150px;"
+				<div class="container-fluid bg-black"
 					align="center">
 					<h5 class="text-white mb-5" align="center"><%=fes_Name%></h5>
 					<section class="search-section bg-black">

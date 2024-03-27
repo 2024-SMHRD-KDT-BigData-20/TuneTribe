@@ -60,7 +60,7 @@ System.out.print("fes_idx =" + fes_idx);
 <body>
 
 		<!-- feed start -->
-		<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
+		<div class="container-fluid bg-black" align="center">
 
 			<div class="feed"  style="width: 600px;" id="feed"></div>
 		</div>

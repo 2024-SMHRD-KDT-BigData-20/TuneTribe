@@ -41,12 +41,12 @@ $(document).ready(function (){
 
 </head>
 <body>
-	<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
+	<div class="container-fluid bg-black" align="center">
 	<h5 class="text-white mb-3" align="center"><%= fes_Name %></h5>
 	<h5 class="text-white mb-3" align="center">LINE-UP</h5>
 	<br>
 	<hr style="color: lightgray;">
-	<div id="feed" style="padding-top: 40px;">
+	<div id="feed">
 	
 	</div>
 	</div>
