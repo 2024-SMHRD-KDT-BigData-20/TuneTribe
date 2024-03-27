@@ -39,6 +39,181 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+<style type="text/css">
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button,
+	.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffffff;
+		color: #ffffff !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	label {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffffff;
+		color: #ffffff !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+		position : relative;
+	}
+
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		input[type="button"]:hover,
+		button:hover,
+		.button:hover {
+			background-color: rgba(255, 255, 255, 0.075);
+		}
+		label:hover,
+		.label:hover {
+			background-color: rgba(255, 255, 255, 0.075);
+		}
+
+		input[type="submit"]:active,
+		input[type="reset"]:active,
+		input[type="button"]:active,
+		button:active,
+		.button:active {
+			background-color: rgba(255, 255, 255, 0.175);
+		}
+		label:active,
+		.label:active {
+			background-color: rgba(255, 255, 255, 0.175);
+		}
+
+		input[type="submit"].icon:before,
+		input[type="reset"].icon:before,
+		input[type="button"].icon:before,
+		button.icon:before,
+		.button.icon:before {
+			margin-right: 0.5em;
+		}
+
+		input[type="submit"].fit,
+		input[type="reset"].fit,
+		input[type="button"].fit,
+		button.fit,
+		.button.fit {
+			width: 100%;
+		}
+		label.fit,
+		.label.fit {
+			width: 100%;
+		}
+
+		input[type="submit"].small,
+		input[type="reset"].small,
+		input[type="button"].small,
+		button.small,
+		.button.small {
+			font-size: 0.6rem;
+			height: 2.0625rem;
+			line-height: 2.0625rem;
+		}
+		label.small,
+		.label.small {
+			font-size: 0.6rem;
+			height: 2.0625rem;
+			line-height: 2.0625rem;
+		}
+
+		input[type="submit"].primary,
+		input[type="reset"].primary,
+		input[type="button"].primary,
+		button.primary,
+		.button.primary {
+			background-color: #ffffff;
+			color: #1b1f22 !important;
+			font-weight: 600;
+		}
+
+		input[type="submit"].disabled, input[type="submit"]:disabled,
+		input[type="reset"].disabled,
+		input[type="reset"]:disabled,
+		input[type="button"].disabled,
+		input[type="button"]:disabled,
+		button.disabled,
+		button:disabled,
+		.button.disabled,
+		.button:disabled {
+			pointer-events: none;
+			cursor: default;
+			opacity: 0.25;
+		}
+
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"],
+	button {
+		line-height: calc(2.75rem - 2px);
+	}
+	label {
+		line-height: calc(2.75rem - 2px);
+	}
+
+	input{
+		color: #ffffff;
+		font-family: "Source Sans Pro", sans-serif;
+		font-weight: 300;
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+	
+	tempbtn {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;	
+	}
+
+</style>
 
 
 
@@ -79,6 +254,101 @@ $(document).ready(function (){
 		
 	}); // reviewlist ajax 끝
 	
+	
+	$(document).ready(function (){
+	    // 댓글 로딩 함수
+	    function loadComments(postId) {
+	    	// var postId = $(this).data('post-id');
+	    	$.ajax({
+	            url: 'CommentListCon',
+	            type: 'GET',
+	            data: { 'b_idx': postId },
+	            dataType: 'json',
+	            success: function(res_cmt) {
+	                var modalContent = '';
+	                
+	                // 댓글들 보이기
+		            for(let j=0; j<res_cmt.length; j++){
+    				modalContent +="<p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
+    				modalContent +="<p style=\"display:none\">" + res_cmt[j].cmt_idx + "</p>";
+    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</p>";
+    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].cmt_content + "</p>";
+    				} // data_cmt 꺼내는 for문 끝
+    				
+    				// 참고용: 이것도 댓글 모두 출력 가능한 문법인 듯
+    				/* res_cmt.forEach(function(cmt) {
+    	                modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + cmt.user_id + ": " + cmt.cmt_content + "</p>";
+    	            }); */
+    				
+	                <!-- 댓글 입력 div 시작 -->
+   					modalContent += '<form id="commentForm">'
+   					modalContent +=	'<div style="display: flex; justify-content: center;">'
+   					modalContent +=	'<input type="hidden" value="${login_vo.user_id }" id="user_id_cmt">'
+   					modalContent +=	'<input type="text" class="commenttext"'
+   					modalContent += 'style="width: 300px; height: 100px; color:black;!important">'
+					<!-- 댓글 작성 버튼 -->
+   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + postId + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
+					<!-- 댓글 입력 div 끝 -->
+   					modalContent += '</div>'
+    				modalContent += '</form>'
+					<!-- 댓글창 닫기 버튼 -->
+    				modalContent += '<button class="close_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Close</button>'
+    				
+    				$('#modalBox').html(modalContent);
+    				
+	                // 모달 박스와 배경을 표시
+	                $('#modalBox').fadeIn(1000);
+	                $('#modalBg').fadeIn(1000);
+	            }
+	        });
+	    }
+	    
+	    // 'Comments' 버튼 클릭 이벤트: 모달창
+	    $(document).on('click', '.cmt_pop_btn', function() {
+	        var postId = $(this).data('post-id');
+	        loadComments(postId); // 댓글 로딩 함수 호출
+	    });
+	    
+		// 'Upload' 버튼 클릭 이벤트: 댓글 업로드
+	    $(document).on('click', '.comment_upload_btn', function() {
+	    	var postId = $(this).data('post-id'); // 이 방식으로 postId 값을 가져옴
+	        var user_id = $('#user_id_cmt').val(); // hidden input 필드의 값
+ 			var commentText = $('.commenttext').val();
+	        
+ 			$.ajax({
+	            url: 'CommentCon',
+	            type: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify({
+	                'b_idx': postId,
+	                'user_id': user_id,
+	                'cmt_content': commentText
+	            }),
+	            success: function(res_cmt){
+                	loadComments(postId);
+	            },
+	            error: function(xhr, status, error){
+	                console.error(error);
+	            }
+	        });
+	    });
+		
+	 	// 모달 닫기 버튼 클릭 이벤트
+	    $(document).on('click', '.close_btn', function() {
+	        $('#modalBox').fadeOut();
+	        $('#modalBg').fadeOut();
+	    });
+	    });
+	    
+		/* // 동적으로 생성된 버튼 스타일: 마우스 올리면 동작
+		/* document.getElementById('button').onmouseover = function() {
+			this.style.backgroundColor = '#558985';
+			this.style.borderColor = '#50817e';
+		};
+		document.getElementById('button').onmouseout = function() {
+			this.style.backgroundColor = '#64a19d';
+			this.style.borderColor = '#64a19d';
+		}; */
 	
 	 $(document).on('click', '.delete_btn', function() {
 	 		var postId= $(this).data('post-id');
@@ -139,12 +409,14 @@ $(document).ready(function (){
 										<input type="text" id="reviewtext"
 											style="width: 400px; height: 150px;">
 									</div>
-									<div>		
-										<input type="file" id="file" class="btn btn-primary"
-											style="height: 50px; width: 100px; margin: 0 auto; display: block;">
-
+									<div>
+										<label for="file" style="height: 50px; width: 100px;" align="center" class="tempbtn">
+											<div color="white" style="height: 50px; padding-top: 4px;">Image</div>
+										</label>
+										<input type="file" id="file" style=display:none>
 										<button type="button" id="reviewbtn" value="upload"
-											class="btn btn-primary" style="height: 50px; width: 100px;">작성</button>
+											class="tempbtn" style="height: 50px; width: 100px;" align="center">작성</button>
+
 									</div>
 								</form>
 							</div>
@@ -173,6 +445,17 @@ $(document).ready(function (){
 		</div>
 	</nav>
 	
+	<!-- 모달 박스 -->
+	<div id="modalBox" class="modal_box"
+		style="border-radius: 10px; background: #fff; z-index: 99; display: none;">
+
+		<!-- 모달 박스 끝 -->
+	</div>
+
+	<!-- 모달창 열릴 때 배경 -->
+	<div class="modal_bg"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 98; background-color: rgba(120, 120, 120, 0.7); display: none;"></div>
+
 	
 
 

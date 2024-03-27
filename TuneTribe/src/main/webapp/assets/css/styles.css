@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 @font-face {
     font-family: 'SUITE-Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
@@ -11278,3 +11278,5 @@ body {
 .footer {
   padding: 5rem 0;
 }
+
+

@@ -51,7 +51,8 @@ $(document).ready(function (){
 
 				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
 				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
- 
+				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
+				
 				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
 
 			} // for 끝
@@ -93,7 +94,7 @@ $(document).ready(function (){
    					modalContent +=	'<div style="display: flex; justify-content: center;">'
    					modalContent +=	'<input type="hidden" value="${login_vo.user_id }" id="user_id_cmt">'
    					modalContent +=	'<input type="text" class="commenttext"'
-   					modalContent += 'style="width: 300px; height: 100px;">'
+   					modalContent += 'style="width: 300px; height: 100px; color:black;!important">'
 					<!-- 댓글 작성 버튼 -->
    					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + postId + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
 					<!-- 댓글 입력 div 끝 -->
@@ -158,6 +159,23 @@ $(document).ready(function (){
 			this.style.borderColor = '#64a19d';
 		}; */
 
+	$(document).on('click', '.delete_btn', function() {
+ 		var postId= $(this).data('post-id');
+ 		console.log(postId);
+ 		$.ajax({
+ 			url:"DeleteCon",
+ 			type: 'GET',
+	            data: {'b_idx': postId, 'user_id': user_id},
+	            success:function(){
+	            	console.log("삭제완료");
+	            	myreviewlist();
+	            },
+	            error: function(jqXHR, textStatus, errorThrown) {
+	                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+	            }		
+ 		}); // ajax 끝
+	    });
+		
 }); // function 끝
 
 
@@ -189,12 +207,14 @@ $(document).ready(function (){
 									style="width: 400px; height: 150px;">
 							</div>
 							<div>
-								<input type="file" id="file" class="btn btn-primary"
-									style="height: 50px; width: 100px; margin: 0 auto; display: block;">
+										<label for="file" style="height: 50px; width: 100px;" align="center" class="tempbtn">
+											<div color="white" style="height: 50px; padding-top: 4px;">Image</div>
+										</label>
+										<input type="file" id="file" style=display:none>
+										<button type="button" id="reviewbtn" value="upload"
+											class="tempbtn" style="height: 50px; width: 100px;" align="center">작성</button>
 
-								<button type="button" id="reviewbtn" value="upload"
-									class="btn btn-primary" style="height: 50px; width: 100px;">작성</button>
-							</div>
+									</div>
 						</form>
 					</div>
 					<!-- 리뷰적는 곳 끝 -->
@@ -236,41 +256,49 @@ $(document).ready(function (){
     			data : formData,
     			contentType: false,
                 processData: false,
-                success: function reviewlist(){
-                	var fes_idx = $('#fes_idx').val();
-            		var imgroute = "./img/"
-            		$.ajax({
-            			url : 'ReviewListCon',
-            			type : 'get',
-            			data: {'fes_idx': fes_idx}, // JSON 문자열로 변환
-            	        dataType: 'json', // 응답 데이터 타입
-            	        success: function(res){
-            	        	console.log(res); //json
-    						let data="";
-        					for(let i=0;i<res.length;i++){
-        						// 태그 내용 담을 변수
-        						data += "<p>" + res[i].b_content + "</p>";
-        		                data += "<p>" + res[i].user_id + "</p>";
-        		                data += "<p>" + res[i].b_likes + "</p>";
-        		                var imgPath = imgroute + res[i].b_file;
-        		                data += '<img src="' + imgPath + '" alt="">';
-        					} // for 끝
-        					$("#postbox").empty();
-    		                $("#postbox").append(data);
-    		                $("#reviewtext").val(""); 
-    		                $("#file").val("");
-    		                
-            	        } // reviewlist success 끝
-            			
-            		}); // reviewlist ajax 끝
-                	
+                success: function(){
+                	refreshReviews();
                 }, // reviewlist success 끝
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
                 } // reviewlist error 끝
     		}); // reviewbtn ajax 끝
     	}); // 버튼클릭 끝
+  // 리뷰 목록 새로고침 함수
+        function refreshReviews() {
+            var fes_idx = $('#fes_idx').val();
+            var imgroute = "./img/";
+            $.ajax({
+                url: 'ReviewListCon',
+                type: 'GET',
+                data: { 'fes_idx': fes_idx },
+                dataType: 'json',
+                success: function(res) {
+                    let data = "";
+                    for(let i = 0; i < res.length; i++) {
+                    	data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+    					
+        				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+        				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+        				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+        				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+        				
+        				var imgPath = imgroute + res[i].b_file;
+        				// img-fluid 클래스: 반응형
+        				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
+        				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+        				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+        				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
+        				
+        				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
+                    }
+                    $("#postbox").empty().append(data);
+                    $("#reviewtext").val(""); // 텍스트 필드 초기화
+                    $("#file").val(""); // 파일 입력 필드 초기화
+                }
+            });
+        }
     </script>
 
 
