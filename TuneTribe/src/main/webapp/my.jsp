@@ -436,13 +436,13 @@ $(document).ready(function (){
 					<br>
 					<div class="sidebarOption" align="center">
 						<span class="material-icons text-white mb-3"> search </span>
-						<h5 data-tab="myinfotap" class="tabmenu text-white mb-3">회원정보수정</h5>
+						<h5 data-tab="myinfotap" class="tabmenu text-white mb-3">MODIFY<br>USER INFO</h5>
 					</div>
 					<br>
 					<div class="sidebarOption" align="center">
 						<span class="material-icons text-white mb-3">
 							notifications_none </span>
-						<h5 data-tab="favchoose" class="tabmenu text-white mb-3">선호도선택</h5>
+						<h5 data-tab="favchoose" class="tabmenu text-white mb-3">MUSIC PREFERENCE</h5>
 					</div>
 				</div>
 			</div>
