@@ -462,7 +462,7 @@ $(document).ready(function (){
 			<!-- feed start -->
 			<div class="feed" style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black" style="padding-top: 300px;"
+				<div class="container-fluid bg-black" style="padding-top: 150px;"
 					align="center">
 					<h5 class="text-white mb-5" align="center"><%=fes_Name%></h5>
 					<section class="search-section bg-black">

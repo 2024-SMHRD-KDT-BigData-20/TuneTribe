@@ -393,7 +393,7 @@ $(document).ready(function (){
 			<!-- feed start -->
 			<div class="feed"  style="width: 600px;" id="feed">
 
-				<div class="container-fluid bg-black" style="padding-top:300px;" align="center">
+				<div class="container-fluid bg-black" style="padding-top:150px;" align="center">
 					<h5 class="text-white mb-5" align="center">${login_vo.user_id}</h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
