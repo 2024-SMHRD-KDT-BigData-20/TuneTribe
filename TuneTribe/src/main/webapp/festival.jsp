@@ -284,8 +284,8 @@ $(document).ready(function (){
 		            for(let j=0; j<res_cmt.length; j++){
     				modalContent +="<p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
     				modalContent +="<p style=\"display:none\">" + res_cmt[j].cmt_idx + "</p>";
-    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</p>";
-    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].cmt_content + "</p>";
+    				modalContent += "<table style=''><tr><td>&nbsp;&nbsp;&nbsp;<span class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</span></td>";
+    				modalContent += "<td><span class=\"text-black mb-3\" align=\"center\">&nbsp;&nbsp;&nbsp;" + res_cmt[j].cmt_content + "</span></td></tr></table>";
     				} // data_cmt 꺼내는 for문 끝
     				
     				// 참고용: 이것도 댓글 모두 출력 가능한 문법인 듯
@@ -399,7 +399,7 @@ $(document).ready(function (){
 		id="mainNav">
 		<div class="container-fluid"
 			style="display: flex; width: 80%; padding-left: 50px; padding-right: 50px;">
-			<a class="navbar-brand" href="main.jsp"><h2>TuneTribe Logo</h2></a>
+			<a class="navbar-brand" href="main.jsp"><img src="./assets/logo.png" alt="" style="width: 200px; height: 50px;"></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -534,7 +534,7 @@ $(document).ready(function (){
 	<!-- 모달 박스 -->
 	<div id="modalBox" class="modal_box white"
 		style="border-radius: 10px; background: #fff; z-index: 99; display: none;
-		height: 50vh; overflow-y: auto;">
+		height: 50vh; overflow-y: auto; width: 40%;">
 
 		<!-- 모달 박스 끝 -->
 	</div>
@@ -598,7 +598,7 @@ $(document).ready(function (){
 					
     				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
     				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
-    				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+    				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</span></div>";
     				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
     				
     				var imgPath = imgroute + res[i].b_file;

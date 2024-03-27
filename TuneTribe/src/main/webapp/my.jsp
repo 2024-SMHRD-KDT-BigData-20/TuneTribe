@@ -389,7 +389,7 @@ $(document).ready(function (){
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
 		id="mainNav">
 		<div class="container-fluid" style="display: flex; width: 80%; padding-left: 50px; padding-right: 50px;">
-			<a class="navbar-brand" href="main.jsp"><h2>TuneTribe Logo</h2></a>
+			<a class="navbar-brand" href="main.jsp"><img src="./assets/logo.png" alt="" style="width: 200px; height: 50px;"></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -451,7 +451,7 @@ $(document).ready(function (){
 			<!-- feed start -->
 			<div class="feed"  style="width: 600px; padding-top: 150px;" id="feed">
 
-				<div class="container-fluid bg-black" style="padding-top:150px;" align="center">
+				<div class="container-fluid bg-black" align="center">
 					<h5 class="text-white mb-5" align="center">${login_vo.user_id}</h5>
 					<section class="search-section bg-black">
 						<!-- 위 3줄 건들지 말기 -->
@@ -513,7 +513,7 @@ $(document).ready(function (){
 	<!-- 모달 박스 -->
 	<div id="modalBox" class="modal_box white"
 		style="border-radius: 10px; background: #fff; z-index: 99; display: none;
-		height: 50vh; overflow-y: auto;">
+		height: 50vh; overflow-y: auto; width: 40%;">
 
 		<!-- 모달 박스 끝 -->
 	</div>

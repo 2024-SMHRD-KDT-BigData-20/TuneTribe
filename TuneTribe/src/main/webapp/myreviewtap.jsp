@@ -448,8 +448,7 @@ $(document).ready(function (){
 	<!-- 모달 박스 -->
 	<div id="modalBox" class="modal_box white"
 		style="border-radius: 10px; background: #fff; z-index: 99; display: none;
-		height: 50vh; overflow-y: auto;">
-
+		height: 50vh; overflow-y: auto; width: 40%;">
 		<!-- 모달 박스 끝 -->
 	</div>
 

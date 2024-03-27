@@ -21,6 +21,9 @@
 
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="assets/css/styles.css" rel="stylesheet" />
+ <link href="assets/css/logo.css" rel="stylesheet" />
+ <link href="assets/css/styles__ltr.css" rel="stylesheet" />
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -30,7 +33,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
 		id="mainNav">
 		<div class="container-fluid" style="display: flex; width: 80%; padding-left: 50px; padding-right: 50px;">
-			<a class="navbar-brand" href="main.jsp"><h2>TuneTribe Logo</h2></a>
+			<a class="navbar-brand" href="main.jsp"><img src="./assets/logo.png" alt="" style="width: 200px; height: 50px;"></a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
