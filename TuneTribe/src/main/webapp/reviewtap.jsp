@@ -236,6 +236,18 @@ $(document).ready(function (){
 		</div>
 	</div>
 	<!-- feed ends -->
+	
+	<!-- 모달 박스 -->
+	<div id="modalBox" class="modal_box white"
+		style="border-radius: 10px; background: #fff; z-index: 99; display: none;
+		height: 50vh; overflow-y: auto;">
+
+		<!-- 모달 박스 끝 -->
+	</div>
+
+	<!-- 모달창 열릴 때 배경 -->
+	<div class="modal_bg"
+		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 98; background-color: rgba(120, 120, 120, 0.7); display: none;"></div>
 
 	<script>
     	var Button = document.getElementById("reviewbtn");
@@ -279,8 +291,8 @@ $(document).ready(function (){
                     	data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
     					
         				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
-        				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
-        				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><p class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</p></div>";
+        				data += "<span class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</span>";
+        				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</span></div>";
         				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
         				
         				var imgPath = imgroute + res[i].b_file;
