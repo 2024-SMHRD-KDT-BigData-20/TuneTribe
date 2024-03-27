@@ -32,7 +32,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 				</div>
 				<div class="field">
 					<label for="user_pw">PW</label>
-					<input type="text" name="user_pw" id="user_pw" />
+					<input type="text" name="user_pw" id="user_pw" style="color:black;!important"/>
 				</div>
 			</div>
 			<ul class="actions">
@@ -48,19 +48,19 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 			<div class="fields">
 				<div class="field">
 					<label for="user_pw">PW</label> <input type="password" name="user_pw1"
-						id="user_pw1" />
+						id="user_pw1" style="color:black;!important"/>
 				</div>
 				<div class="field">
 					<label for="user_pw">PW확인</label> <input type="password" name="user_pw2"
-						id="user_pw2" />
+						id="user_pw2" style="color:black;!important"/>
 				</div>
 				<div class="field">
 					<label for="user_nick">NICKNAME</label> <input type="text"
-						name="user_nick" id="user_nick" />
+						name="user_nick" id="user_nick" style="color:black;!important"/>
 				</div>
 				<div class="field">
 					<label for="user_birthdate">BIRTHDATE</label> <input type="date"
-						name="user_birthdate" id="user_birthdate" />
+						name="user_birthdate" id="user_birthdate" style="color:black;!important" />
 				</div>
 				<div class="field">
 					<select name="user_gender" id="user_gender">

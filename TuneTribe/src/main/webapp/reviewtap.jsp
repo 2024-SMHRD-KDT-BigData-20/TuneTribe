@@ -80,8 +80,8 @@ $(document).ready(function (){
 		            for(let j=0; j<res_cmt.length; j++){
     				modalContent +="<p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
     				modalContent +="<p style=\"display:none\">" + res_cmt[j].cmt_idx + "</p>";
-    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</p>";
-    				modalContent += "<p class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].cmt_content + "</p>";
+    				modalContent += "<table style=''><tr><td>&nbsp;&nbsp;&nbsp;<span class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</span></td>";
+    				modalContent += "<td><span class=\"text-black mb-3\" align=\"center\">&nbsp;&nbsp;&nbsp;" + res_cmt[j].cmt_content + "</span></td></tr></table>";
     				} // data_cmt 꺼내는 for문 끝
     				
     				// 참고용: 이것도 댓글 모두 출력 가능한 문법인 듯

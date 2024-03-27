@@ -35,16 +35,17 @@ System.out.println("[favchoose]");
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
 
-
+<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https: //fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <style>
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 .wrapper {
-	width: 360px;
+	width: 100%;
 	margin: 20px auto 0;
 }
 
@@ -57,7 +58,7 @@ System.out.println("[favchoose]");
 .select {
 	height: 60px;
 	padding: 0 20px;
-	background: #4285f4;
+	background: black; /* #4285f4 */
 	border-radius: 10px;
 	color: #ffffff;
 	justify-content: space-between;
@@ -120,6 +121,50 @@ System.out.println("[favchoose]");
 .options li:hover {
 	background: #f2f2f2;
 }
+
+	/* 그리드 레이아웃 설정 */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* 각 영역 스타일 설정 */
+      .grid-item {
+        border: 1px solid black;
+        width: 100%;
+        height: 100%;
+      }
+      
+      /* 각 영역 ID 설정 */
+      #item1, #item2, #item3, #item4 {
+        overflow: auto;
+      }
+      
+      #item1 {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+      }
+      
+      #item2 {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+      }
+      
+      #item3 {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+      }
+      
+      #item4 {
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+      }
+      
+      
 </style>
 
 <!-- 가수리스트 -->
@@ -178,14 +223,17 @@ var genres =[];
 </head>
 <body>
 
-
-
-
-
-
-
-
-	<div class="wrapper" id="wrapper">
+	<div class="grid-container">
+      <div class="grid-item" id="item1">
+        <h3 class="text-white mb-5">선호 가수 목록</h3>
+		<p class="text-white mb-5" id="singerlist"></p>
+      </div>
+      <div class="grid-item" id="item2">
+        <h3 class="text-white mb-5">선호 장르 목록</h3>
+		<p class="text-white mb-5" id="genrelist"></p>
+      </div>
+      <div class="grid-item" id="item3">
+        <div class="wrapper" id="wrapper" style="float:left;">
 		<div class="select" id="select">
 			<span>선호가수를 선택해주세요</span> <span class="material-icons">expand_more</span>
 		</div>
@@ -201,19 +249,9 @@ var genres =[];
 		</div>
 		<!--content-->
 	</div>
-
-
-	<!-- 선택된 가수 적을 공간 시작 -->
-	<div>
-		<h3 class="text-white mb-5">선호 가수 목록</h3>
-		<p class="text-white mb-5" id="singerlist"></p>
-	</div>
-	<!-- 선택된 가수 적을 공간 끝 -->
-
-
-
-
-	<div class="wrapper" id="wrappergenre">
+      </div>
+      <div class="grid-item" id="item4">
+        <div class="wrapper" id="wrappergenre" style="float:left;">
 		<div class="select" id="selectgenre">
 			<span>선호장르를 선택해주세요</span> <span class="material-icons">expand_more</span>
 		</div>
@@ -229,15 +267,16 @@ var genres =[];
 		</div>
 		<!--content-->
 	</div>
+      </div>
+    </div>
 
-	<!-- 선택된 장르 적을 공간 시작 -->
-	<div>
-		<h3 class="text-white mb-5">선호 장르 목록</h3>
-		<p class="text-white mb-5" id="genrelist"></p>
-	</div>
-	<!-- 선택된 장르 적을 공간 끝 -->
 
+	<hr>
+	<br>
+	
+	<div style="float:left;">
 	<button id="favbtn">저장</button>
+	</div>
 
 
 
