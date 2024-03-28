@@ -43,7 +43,7 @@ public class ReviewCon extends HttpServlet {
                     	System.out.println("파일처리");
                         b_file = uuid.toString()+"_"+ new File(item.getName()).getName();
                         System.out.println(b_file);
-                        item.write(new File("C:/Users/smart/git/TuneTribe/TuneTribe/src/main/webapp/img" + File.separator + b_file));
+                        item.write(new File("C:/Users/smhrd/git/TuneTribe/TuneTribe/src/main/webapp/img" + File.separator + b_file));
                     } else {
                         // 텍스트 데이터 처리
                     	System.out.println("텍스트처리");
