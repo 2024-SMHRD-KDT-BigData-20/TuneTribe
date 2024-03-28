@@ -126,8 +126,8 @@ System.out.println("[favchoose]");
       .grid-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        height: 100vh;
+        grid-template-rows: 100px, minmax(100px, auto);
+        height: 70vh;
         margin: 0;
         padding: 0;
       }
@@ -235,28 +235,26 @@ var genres =[];
       <div class="grid-item" id="item3">
         <div class="wrapper" id="wrapper" style="float:left;">
 		<div class="select" id="select">
-			<span>선호가수를 선택해주세요</span> <span class="material-icons">expand_more</span>
+			<span>선호가수를 선택해주세요</span>
+			<span class="material-icons">expand_more</span>
 		</div>
-		<!--select-->
 		<div class="content">
-			<div class="search-box">
-				<span class="material-icons">search</span> <input class="filter"
-					id="filter" type="text" placeholder="검색">
-			</div>
-			<!--search box-->
-			<ul class="options" id="options">
-			</ul>
+		<div class="search-box">
+			<span class="material-icons">search</span>
+			<input class="filter" id="filter" type="text" placeholder="검색">
 		</div>
-		<!--content-->
-	</div>
+		<ul class="options" id="options">
+		</ul>
+		</div>
+		</div>
       </div>
       <div class="grid-item" id="item4">
         <div class="wrapper" id="wrappergenre" style="float:left;">
-		<div class="select" id="selectgenre">
+			<div class="select" id="selectgenre">
 			<span>선호장르를 선택해주세요</span> <span class="material-icons">expand_more</span>
-		</div>
-		<!--select-->
-		<div class="content">
+			</div>
+			<!--select-->
+			<div class="content">
 			<div class="search-box">
 				<span class="material-icons">search</span> <input class="filter"
 					id="filtergenre" type="text" placeholder="검색">
@@ -277,6 +275,9 @@ var genres =[];
 	<div style="float:left;">
 	<button id="favbtn">저장</button>
 	</div>
+
+
+
 
 
 
