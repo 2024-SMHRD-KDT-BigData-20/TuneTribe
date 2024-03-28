@@ -13,6 +13,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 String fes_idx = (String) session.getAttribute("fesIdx");
 String fes_Name = (String) session.getAttribute("fesName");
 System.out.print("fes_idx =" + fes_idx);
+session.setAttribute("fes_idx", fes_idx);
 session.setMaxInactiveInterval(120*60);
 %>
 <html lang="en">
@@ -467,7 +468,7 @@ $(document).ready(function (){
             				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
             				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-            				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+            				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
             				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
             				
             				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
@@ -728,7 +729,7 @@ $(document).ready(function (){
     				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
     				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-    				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+    				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
     				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
     				
     				data += "<br><br><hr><br><br></div>"; // 게시물 구분선

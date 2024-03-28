@@ -241,7 +241,7 @@ $(document).ready(function (){
 				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
 				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
 				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
  
 				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
@@ -368,6 +368,25 @@ $(document).ready(function (){
 			this.style.borderColor = '#64a19d';
 		}; */
 	
+		 $(document).on('click', '.delete_btn', function() {
+		 		var postId= $(this).data('post-id');
+		 		console.log(postId);
+		 		$.ajax({
+		 			url:"DeleteCon",
+		 			type: 'GET',
+			            data: {'b_idx': postId, 'user_id': user_id},
+			            success:function(){
+			            	console.log("삭제완료");
+			            	myreviewlist();
+			            },
+			            error: function(jqXHR, textStatus, errorThrown) {
+			                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+			            }		
+		 		}); // ajax 끝
+			    });
+		
+		
+		
 	$(document).on('click', '.like_btn', function() {
 		var b_idx= $(this).data('post-id');
 		var user_id="${login_vo.user_id}"
@@ -399,7 +418,7 @@ $(document).ready(function (){
             				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
             				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-            				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+            				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
             				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
             				
             				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
@@ -562,7 +581,7 @@ $(document).ready(function (){
     				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
     				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-    				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+    				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
     				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
      
     				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
