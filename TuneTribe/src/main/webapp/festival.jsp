@@ -316,7 +316,7 @@ $(document).ready(function (){
    					modalContent +=	'<input type="text" class="commenttext"'
    					modalContent += 'style="width: 300px; height: 100px; color:black;!important">'
 					<!-- 댓글 작성 버튼 -->
-   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + res[i].b_idx + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
+   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + postId + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
 					<!-- 댓글 입력 div 끝 -->
    					modalContent += '</div>'
     				modalContent += '</form>'
