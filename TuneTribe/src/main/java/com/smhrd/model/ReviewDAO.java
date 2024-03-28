@@ -51,5 +51,14 @@ public class ReviewDAO {
 		return eachReview;
 	}
 	
+	// 좋아요 up
+	public int reviewlikeup(int b_idx) {
+		int cnt =0;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		cnt = session.update("com.smhrd.db.ReviewMapper.reviewlikeup", b_idx);
+		session.close();
+		return cnt;
+	}
+	
 	
 }

@@ -254,7 +254,6 @@ $(document).ready(function (){
 	}); // reviewlist ajax 끝
 	
 	
-	$(document).ready(function (){
 	    // 댓글 로딩 함수
 	    function loadComments(postId) {
 	    	// var postId = $(this).data('post-id');
@@ -357,7 +356,7 @@ $(document).ready(function (){
 	        $('#modalBox').fadeOut();
 	        $('#modalBg').fadeOut();
 	    });
-	    });
+
 	    
 		/* // 동적으로 생성된 버튼 스타일: 마우스 올리면 동작
 		/* document.getElementById('button').onmouseover = function() {
@@ -369,22 +368,53 @@ $(document).ready(function (){
 			this.style.borderColor = '#64a19d';
 		}; */
 	
-	 $(document).on('click', '.delete_btn', function() {
-	 		var postId= $(this).data('post-id');
-	 		console.log(postId);
-	 		$.ajax({
-	 			url:"DeleteCon",
-	 			type: 'GET',
-		            data: {'b_idx': postId, 'user_id': user_id},
-		            success:function(){
-		            	console.log("삭제완료");
-		            	myreviewlist();
-		            },
-		            error: function(jqXHR, textStatus, errorThrown) {
-		                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
-		            }		
-	 		}); // ajax 끝
-		    });
+	$(document).on('click', '.like_btn', function() {
+		var b_idx= $(this).data('post-id');
+		var user_id="${login_vo.user_id}"
+		console.log(user_id);
+		$.ajax({
+			url:"LikesCon",
+			type:'GET',
+			data:{'b_idx':b_idx, 'user_id':user_id},
+			success:function(){
+				var fes_idx = $('#fes_idx').val();
+                var imgroute = "./img/";
+                $.ajax({
+                    url: 'ReviewListCon',
+                    type: 'GET',
+                    data: { 'fes_idx': fes_idx },
+                    dataType: 'json',
+                    success: function(res) {
+                        let data = "";
+                        for(let i = 0; i < res.length; i++) {
+                        	data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+        					
+            				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+            				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+            				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</span></div>";
+            				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+            				
+            				var imgPath = imgroute + res[i].b_file;
+            				// img-fluid 클래스: 반응형
+            				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+            				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+            				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+            				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
+            				
+            				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
+                        }
+                        $("#postbox").empty().append(data);
+                        $("#reviewtext").val(""); // 텍스트 필드 초기화
+                        $("#file").val(""); // 파일 입력 필드 초기화
+                    }
+                });
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+            }
+		}); //ajax 끝
+	});
 	
 	
 }) // function 끝

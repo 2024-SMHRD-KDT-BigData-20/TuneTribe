@@ -37,7 +37,23 @@
 		select * from board where b_idx=#{b_idx}
 	</select>
 	
+	<!-- 리뷰 좋아요 눌렀는지 확인 -->
+	<select id="reviewlikecheck" parameterType="LikesVO" resultType="LikesVO">
+		select user_id,b_idx from likes where user_id=#{user_id} and b_idx=#{b_idx}
+	</select>
 	
+	<!-- 리뷰 좋아요 -->
+	<insert id="reviewlike" parameterType="LikesVO">
+		insert into likes values(#{user_id},#{b_idx},1)
+	</insert>
+	
+	<update id="reviewlikeup" parameterType="int">
+		update board set b_likes=(select count(like_check) from likes where b_idx=#{b_idx}) where b_idx=#{b_idx}
+	</update>
+	
+	<delete id="reviewlikecan" parameterType="LikesVO">
+		delete from likes where user_id=#{user_id} and b_idx=#{b_idx}
+	</delete>
 	
 	<parameterMap id="map" type="map">
     	<parameter property="b_content" jdbcType="VARCHAR"/>

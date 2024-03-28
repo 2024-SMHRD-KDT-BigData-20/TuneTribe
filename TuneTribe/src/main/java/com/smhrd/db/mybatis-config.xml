@@ -11,6 +11,7 @@
 		<typeAlias type="com.smhrd.model.CommentVO" alias="CommentVO" />
 		<typeAlias type="com.smhrd.model.FavVO" alias="FavVO" />
 		<typeAlias type="com.smhrd.model.FestivalsVO" alias="FestivalsVO" />
+		<typeAlias type="com.smhrd.model.LikesVO" alias="LikesVO" />
 		<typeAlias type="com.smhrd.model.RecommendVO" alias="RecommendVO" />
 		<typeAlias type="com.smhrd.model.ReviewVO" alias="ReviewVO" />
 		<typeAlias type="com.smhrd.model.SingersVO" alias="SingersVO" />

@@ -34,7 +34,7 @@ public class ReviewVO {
 		this.b_idx = b_idx;
 		this.user_id = user_id;
 	}
-	
+
 	
 	
 }

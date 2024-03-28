@@ -254,7 +254,7 @@ $(document).ready(function (){
 				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
 
 				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
-				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
 				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
 				
 				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
@@ -268,7 +268,7 @@ $(document).ready(function (){
 	}); // reviewlist ajax 끝
 	
 	
-	$(document).ready(function (){
+
 	    // 댓글 로딩 함수
 	    function loadComments(postId) {
 	    	// var postId = $(this).data('post-id');
@@ -314,7 +314,7 @@ $(document).ready(function (){
    					modalContent +=	'<input type="text" class="commenttext"'
    					modalContent += 'style="width: 300px; height: 100px; color:black;!important">'
 					<!-- 댓글 작성 버튼 -->
-   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + postId + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
+   					modalContent += '<button type="button" class="comment_upload_btn" data-post-id="' + res[i].b_idx + '" value="upload" style="height: 50px; width: 100px; color: #fff; background-color: #64a19d; border-color: #64a19d;">Upload</button>'
 					<!-- 댓글 입력 div 끝 -->
    					modalContent += '</div>'
     				modalContent += '</form>'
@@ -374,7 +374,7 @@ $(document).ready(function (){
 	        $('#modalBox').fadeOut();
 	        $('#modalBg').fadeOut();
 	    });
-	    });
+
 	    
 		/* // 동적으로 생성된 버튼 스타일: 마우스 올리면 동작
 		/* document.getElementById('button').onmouseover = function() {
@@ -388,21 +388,102 @@ $(document).ready(function (){
 
 	$(document).on('click', '.delete_btn', function() {
  		var postId= $(this).data('post-id');
+ 		var user_id="${login_vo.user_id}"
  		console.log(postId);
  		$.ajax({
  			url:"DeleteCon",
  			type: 'GET',
-	            data: {'b_idx': postId, 'user_id': user_id},
-	            success:function(){
+	        data: {'b_idx': postId, 'user_id': user_id},
+	        success:function(){
 	            	console.log("삭제완료");
-	            	myreviewlist();
-	            },
-	            error: function(jqXHR, textStatus, errorThrown) {
-	                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
-	            }		
+	            	 var fes_idx = $('#fes_idx').val();
+	                 var imgroute = "./img/";
+	                 $.ajax({
+	                     url: 'ReviewListCon',
+	                     type: 'GET',
+	                     data: { 'fes_idx': fes_idx },
+	                     dataType: 'json',
+	                     success: function(res) {
+	                         let data = "";
+	                         for(let i = 0; i < res.length; i++) {
+	                         	data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+	         					
+	             				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+	             				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+	             				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</span></div>";
+	             				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+	             				
+	             				var imgPath = imgroute + res[i].b_file;
+	             				// img-fluid 클래스: 반응형
+	             				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+	             				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+	             				data += '&nbsp;<button class="like_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+	             				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
+	             				
+	             				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
+	                         }
+	                         $("#postbox").empty().append(data);
+	                         $("#reviewtext").val(""); // 텍스트 필드 초기화
+	                         $("#file").val(""); // 파일 입력 필드 초기화
+	                     }
+	                 });
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) {
+	            console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+	        }		
  		}); // ajax 끝
-	    });
+	    }); // 삭제버튼 끝
+	
+	$(document).on('click', '.like_btn', function() {
+		var b_idx= $(this).data('post-id');
+		var user_id="${login_vo.user_id}"
+		console.log(user_id);
+		$.ajax({
+			url:"LikesCon",
+			type:'GET',
+			data:{'b_idx':b_idx, 'user_id':user_id},
+			success:function(){
+				var fes_idx = $('#fes_idx').val();
+                var imgroute = "./img/";
+                $.ajax({
+                    url: 'ReviewListCon',
+                    type: 'GET',
+                    data: { 'fes_idx': fes_idx },
+                    dataType: 'json',
+                    success: function(res) {
+                        let data = "";
+                        for(let i = 0; i < res.length; i++) {
+                        	data += "<div class=\"container px-4 px-lg-5 bg-light\" style='padding-top: 20px;'>"; // 게시물 감쌀 공간
+        					
+            				data += "<p style=\"display: none;\">" + res[i].b_idx + "</p>";
+            				data += "<p class=\"text-black mb-3\" align=\"left\">작성자: " + res[i].user_id + "</p>";
+            				data += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res[i].b_content + "</span></div>";
+            				data += "<p class=\"text-black mb-3\" align=\"right\" style='font-size: 15px;'>" + res[i].b_likes + " likes</p>";
+            				
+            				var imgPath = imgroute + res[i].b_file;
+            				// img-fluid 클래스: 반응형
+            				data += '<img src="' + imgPath + '" alt="" class="img-fluid"><br><br>';
+
+            				data += "<button class=\"cmt_pop_btn\" data-post-id=\"" + res[i].b_idx + "\" style=\"color: #fff; background-color: #64a19d; border-color: #64a19d;\">Comments</button>";
+            				data += '&nbsp;<button class="like_btn" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Likes</button>'; // 좋아요 버튼(구현 전)
+            				data += '&nbsp;<button class="delete_btn" data-post-id=\"' + res[i].b_idx + '\" style="color: #fff; background-color: #64a19d; border-color: #64a19d;">Delete</button>'; // 삭제 버튼
+            				
+            				data += "<br><br><hr><br><br></div>"; // 게시물 구분선
+                        }
+                        $("#postbox").empty().append(data);
+                        $("#reviewtext").val(""); // 텍스트 필드 초기화
+                        $("#file").val(""); // 파일 입력 필드 초기화
+                    }
+                });
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+            }
+		}); //ajax 끝
+	});
 		
+	
 		
 }); // function 끝
 
@@ -574,6 +655,23 @@ $(document).ready(function (){
 
 
 	<script>
+/* 	
+	$(document).on('click', '.like_btn', function() {
+		var b_idx= $(this).data('post-id');
+		$.ajax({
+			url:"LikesCon",
+			type:'GET',
+			data:{'b_idx':b_idx, 'user_id':user_id},
+			success:function(){
+				refreshReviews();
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
+            }
+		}); //ajax 끝
+	}); // 좋아요버튼 끝 */
+	
+	
 	
 	// 리뷰 작성
 	$(document).ready(function() {
@@ -639,7 +737,11 @@ $(document).ready(function (){
                 $("#file").val(""); // 파일 입력 필드 초기화
             }
         });
-    }
+    } // refresh 끝
+    
+
+    
+    
 });
 
 	
@@ -761,8 +863,12 @@ $(document).ready(function (){
 			});	// ajax 끝
     	}); // tab operation 끝
 
+    
     	
+    
+    
     	
+    
     </script>
 
 	<!-- footer -->
