@@ -13,6 +13,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 String fes_idx = (String) session.getAttribute("fesIdx");
 String fes_Name = (String) session.getAttribute("fesName");
 System.out.print("fes_idx =" + fes_idx);
+session.setMaxInactiveInterval(120*60);
 %>
 <html lang="en">
 <head>

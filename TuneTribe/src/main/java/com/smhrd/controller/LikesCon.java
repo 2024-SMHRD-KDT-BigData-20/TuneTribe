@@ -20,6 +20,7 @@ public class LikesCon extends HttpServlet {
 		System.out.print("[LikesCon]");
 		String user_id = request.getParameter("user_id");
 		String bIdx = request.getParameter("b_idx");
+		System.out.println(user_id+bIdx);
 		int b_idx = Integer.parseInt(bIdx);
 		
 		System.out.println("user_id : " + user_id);

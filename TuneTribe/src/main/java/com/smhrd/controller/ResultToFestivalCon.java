@@ -39,6 +39,7 @@ public class ResultToFestivalCon extends HttpServlet {
 		session.setAttribute("fesLocation", fesLocation);
 		session.setAttribute("fesStDt", fesStDt);
 		session.setAttribute("fesEdDt", fesEdDt);
+		session.setMaxInactiveInterval(120*60);
 	}
 
 	
