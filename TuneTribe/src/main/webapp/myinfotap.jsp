@@ -22,7 +22,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 
 </head>
 <body>
-	<article id="signin">
+<%-- 	<article id="signin">
 		<h1 class="major">SIGN IN</h1>
 		<form method="post" id="logincheck">
 			<div class="fields">
@@ -39,11 +39,30 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 				<li><input type="button" id="logincheckbtn" value="로그인"></li>
 			</ul>
 		</form>
+	</article> --%>
+	
+	<article id="signin">
+		<h1 class="major" style="color:white;!important">SIGN IN</h1>
+		<form method="post" id="logincheck">
+			<table>
+				<tr>
+					<td align="right" style="color:white;!important">ID&nbsp;&nbsp;&nbsp;<input type="hidden" value="${login_vo.user_id}" id="user_id" /></td>
+					<td style="color:white;!important">${login_vo.user_id}</td>
+				</tr>
+				<tr>
+					<td align="right" style="color:white;!important">PW&nbsp;&nbsp;&nbsp;</td>
+					<td><input type="text" name="user_pw" id="user_pw" style="color:black;!important"/></td>
+				</tr>
+				<tr>
+					<td align="center" colspan=2><input type="button" id="logincheckbtn" value="로그인"></td>
+				</tr>
+			</table>
+		</form>
 	</article>
 
-	<!-- signup -->
-	<article id="signup" style = display:none>
-		<h1 class="major">SIGN UPDATE</h1>
+	 <!-- signup -->
+	<!-- <article id="signup" style = display:none>
+		<h1 class="major" style="color:white;!important">SIGN UPDATE</h1>
 		<form method="post" action="JoinCon">
 			<div class="fields">
 				<div class="field">
@@ -75,6 +94,49 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 				<li><input type="button" id="updatebtn" value="수정"></li>
 				<li><input type="reset" value="Reset" /></li>
 			</ul>
+		</form>
+	</article> -->
+
+<br>
+<hr style="color:white;!important">
+<br>
+
+<!-- signup -->
+	<article id="signup" style = display:none>
+		<h1 class="major" style="color:white;!important">SIGN UPDATE</h1>
+		<form method="post" action="JoinCon">
+		
+		<table>
+			<tr>
+				<td align="right" style="color:white;!important">PW&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="password" name="user_pw1" id="user_pw1" style="color:black;!important"/></td>
+			</tr>
+			<tr>
+				<td align="right" style="color:white;!important">PW확인&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="password" name="user_pw2" id="user_pw2" style="color:black;!important"/></td>
+			</tr>
+			<tr>
+				<td align="right" style="color:white;!important">NICKNAME&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="text" name="user_nick" id="user_nick" style="color:black;!important"/></td>
+			</tr>
+			<tr>
+				<td align="right" style="color:white;!important">BIRTHDATE&nbsp;&nbsp;&nbsp;</td>
+				<td><input type="date" name="user_birthdate" id="user_birthdate" style="color:black;!important" /></td>
+			</tr>
+			<tr>
+				<td align="right" style="color:white;!important">GENDER&nbsp;&nbsp;&nbsp;</td>
+				<td><select name="user_gender" id="user_gender">
+						<option value="">GENDER</option>
+						<option value="1">MALE</option>
+						<option value="2">FEMALE</option>
+						<option value="3">OTHER</option>
+					</select></td>
+			</tr>
+			<tr>
+				<td align="right"><input type="button" id="updatebtn" value="수정"></td>
+				<td><input type="reset" value="Reset" /></td>
+			</tr>
+		</table>
 		</form>
 	</article>
 

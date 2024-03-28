@@ -84,7 +84,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 		border-radius: 4px;
 		border: 0;
 		box-shadow: inset 0 0 0 1px #ffffff;
-		color: #ffffff !important;
+		color: #ffffff;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.8rem;
