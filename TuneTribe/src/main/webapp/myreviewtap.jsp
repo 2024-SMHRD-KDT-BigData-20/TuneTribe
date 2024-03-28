@@ -406,7 +406,7 @@ $(document).ready(function (){
 
 									<div style="display: flex; justify-content: center;">
 										<input type="text" id="reviewtext"
-											style="width: 400px; height: 150px;">
+											style="width: 400px; height: 150px; color:black;">
 									</div>
 									<div>
 										<label for="file" style="height: 50px; width: 100px;" align="center" class="tempbtn">
