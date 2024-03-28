@@ -43,5 +43,13 @@ public class ReviewDAO {
 		return cnt;
 	}
 	
+	public ReviewVO eachReview(int b_idx) {
+		ReviewVO eachReview = null;
+		SqlSession session = sqlSessionFactory.openSession(true);
+		eachReview = session.selectOne("com.smhrd.db.ReviewMapper.eachReview", b_idx);
+		session.close();
+		return eachReview;
+	}
+	
 	
 }

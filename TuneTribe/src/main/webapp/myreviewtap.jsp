@@ -266,12 +266,26 @@ $(document).ready(function (){
 	            success: function(res_cmt) {
 	                var modalContent = '';
 	                
+	                $.ajax({ // 모달창에서 해당 게시물만 가져오는 통신
+	                	url: 'EachPostForComment',
+	                	type: 'get',
+	                	data: {'b_idx': postId},
+	                	dataType: 'json',
+	                	success: function(res_each_post) {
+	                		// 작성자
+	                		modalContent += '<table><tr><td colspan=2><span class=\"text-black mb-3\" align=\"left\">작성자:' + res_each_post.user_id + '</span><br>';
+	                		// 내용
+	                		modalContent += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res_each_post.b_content + "</span></div>";
+	                		// 이미지
+	        				var imgPath = imgroute + res_each_post.b_file;
+	        				modalContent += '<img src="' + imgPath + '" alt="" class="img-fluid"></td></tr>';
+	        				
 	                // 댓글들 보이기
 		            for(let j=0; j<res_cmt.length; j++){
-    				modalContent +="<p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
+    				modalContent +="<td><p style=\"display:none\">" + res_cmt[j].b_idx + "</p>";
     				modalContent +="<p style=\"display:none\">" + res_cmt[j].cmt_idx + "</p>";
-    				modalContent += "<table style=''><tr><td>&nbsp;&nbsp;&nbsp;<span class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</span></td>";
-    				modalContent += "<td><span class=\"text-black mb-3\" align=\"center\">&nbsp;&nbsp;&nbsp;" + res_cmt[j].cmt_content + "</span></td></tr></table>";
+    				modalContent += "<table><tr><td>&nbsp;&nbsp;&nbsp;<span class=\"text-black mb-3\" align=\"center\">" + res_cmt[j].user_id + "</span></td>";
+    				modalContent += "<td><span class=\"text-black mb-3\" align=\"center\">&nbsp;&nbsp;&nbsp;" + res_cmt[j].cmt_content + "</span></td></tr></table> </td></tr></table>";
     				} // data_cmt 꺼내는 for문 끝
     				
     				// 참고용: 이것도 댓글 모두 출력 가능한 문법인 듯
@@ -298,6 +312,12 @@ $(document).ready(function (){
 	                // 모달 박스와 배경을 표시
 	                $('#modalBox').fadeIn(1000);
 	                $('#modalBg').fadeIn(1000);
+	                	},
+	                	error: function(xhr, status, error){
+	    	                console.error(error);
+	    	            }
+	                	
+	                });
 	            }
 	        });
 	    }
@@ -447,7 +467,7 @@ $(document).ready(function (){
 	<!-- 모달 박스 -->
 	<div id="modalBox" class="modal_box white"
 		style="border-radius: 10px; background: #fff; z-index: 99; display: none;
-		height: 50vh; overflow-y: auto; width: 40%;">
+		height: 70%; overflow-y: auto; width: 40%;">
 		<!-- 모달 박스 끝 -->
 	</div>
 

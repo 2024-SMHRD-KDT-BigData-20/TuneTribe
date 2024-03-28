@@ -11,37 +11,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.smhrd.model.CommentDAO;
-import com.smhrd.model.CommentVO;
+import com.smhrd.model.ReviewDAO;
+import com.smhrd.model.ReviewVO;
 
-@WebServlet("/CommentListCon")
-public class CommentListCon extends HttpServlet {
+@WebServlet("/EachPostForComment")
+public class EachPostForComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.print("[CommentListCon]");
 
 		String bIdx = request.getParameter("b_idx");
 		System.out.println("String 상태의 bIdx: " + bIdx);
 		int b_idx = Integer.parseInt(bIdx);
-
-		System.out.println("게시물 고유 인덱스:" + b_idx);
-		CommentDAO dao = new CommentDAO();
 		
-		List<CommentVO> cmtlist = dao.commentList(b_idx);
+		ReviewDAO dao = new ReviewDAO();
+		ReviewVO eachReview = dao.eachReview(b_idx);
 		
 		Gson gson = new Gson();
-		String res_cmt = gson.toJson(cmtlist);
+		String res_each_post = gson.toJson(eachReview);
 		
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-
-		if(cmtlist !=null) {
-			out.print(res_cmt);
+		
+		System.out.println(res_each_post);
+		
+		if(res_each_post !=null) {
+			out.print(res_each_post);
 		}else {
 			System.out.println("댓글 불러오기 실패");
 		}
+		
+		
+		
 	}
 
 }

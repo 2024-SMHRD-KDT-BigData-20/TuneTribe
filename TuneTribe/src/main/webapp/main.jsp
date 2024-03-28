@@ -256,7 +256,8 @@
 											<input class="form-control" name="searchText"
 												id="emailAddress" type="text"
 												placeholder="Please enter a search term"
-												aria-label="Please enter a search term" />
+												aria-label="Please enter a search term"
+												style="height: 55px;"/>
 										</div>
 									</td>
 									<td><input type="submit" id="submitButton"

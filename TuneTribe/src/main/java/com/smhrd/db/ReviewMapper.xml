@@ -24,14 +24,19 @@
 	
 	<!-- 해당 게시글의 댓글 가져오기 -->
 	<select id="commentList" parameterType="int" resultType="CommentVO">
-		select * from comments where b_idx=#{b_idx} order by cmt_idx desc
+		select * from comments where b_idx=#{b_idx} order by cmt_idx asc
 	</select>
-	
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deletereview" parameterType="ReviewVO">
 		delete from board where b_idx=#{b_idx} and user_id=#{user_id}
 	</delete>
+	
+	<!-- 해당 게시글만 가져오기 -->
+	<select id="eachReview" parameterType="int" resultType="ReviewVO">
+		select * from board where b_idx=#{b_idx}
+	</select>
+	
 	
 	
 	<parameterMap id="map" type="map">
