@@ -34,6 +34,7 @@ public class LoginCon extends HttpServlet {
 			// 로그인 성공, 세션에 값 저장하기
 			HttpSession session = request.getSession();
 			session.setAttribute("login_vo", login_vo);
+			session.setMaxInactiveInterval(120*60);
 			
 			// 포워드 방식
 			RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
