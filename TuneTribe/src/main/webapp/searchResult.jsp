@@ -40,7 +40,7 @@
 	<%@ include file="header.jsp"%>
 
 	<!-- search-->
-	<section class="search-section" id="search">
+	<section class="search-section bg-black" id="search" style="padding-top: 100px;">
 		<div class="container px-4 px-lg-5">
 			<div class="row gx-4 gx-lg-5">
 				<div class="col-md-10 col-lg-8 mx-auto text-center">
@@ -72,8 +72,8 @@
 		</div>
 	</section>
 
-	<section class="projects-section bg-light">
-		<h1 align="center">Festivals</h1>
+	<section class="projects-section bg-black">
+		
 		<div class="container px-4 px-lg-5">
 			<br>
 

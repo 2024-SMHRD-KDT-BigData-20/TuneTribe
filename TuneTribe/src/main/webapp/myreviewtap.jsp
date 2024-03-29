@@ -219,7 +219,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 <script>
 $(document).ready(function (){
 	var user_id = "${login_vo.user_id}"
-	var imgroute = "./img/"
+	var imgroute = "/tomcatImg/"
 	$.ajax({
 		url : 'MyReviewListCon',
 		type : 'get',
@@ -397,7 +397,7 @@ $(document).ready(function (){
 			data:{'b_idx':b_idx, 'user_id':user_id},
 			success:function(){
 				var fes_idx = $('#fes_idx').val();
-                var imgroute = "./img/";
+                var imgroute = "/tomcatImg/";
                 $.ajax({
                     url: 'ReviewListCon',
                     type: 'GET',
@@ -558,7 +558,7 @@ $(document).ready(function (){
 	
 	function myreviewlist(){
     	var user_id = "${login_vo.user_id}"
-    	var imgroute = "./img/"
+    	var imgroute = "/tomcatImg/"
     	$.ajax({
     		url : 'MyReviewListCon',
     		type : 'get',

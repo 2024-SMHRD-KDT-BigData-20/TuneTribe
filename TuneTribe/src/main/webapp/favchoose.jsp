@@ -127,8 +127,8 @@ System.out.println("[favchoose]");
       .grid-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 200px, auto;
-        height: 80vh;
+        grid-template-rows: repeat(4, 1fr);
+        height: 90vh;
         margin: 0;
         padding: 0;
       }
@@ -156,12 +156,14 @@ System.out.println("[favchoose]");
       }
       
       #item3 {
-        grid-row: 2 / 3;
+        grid-row-start: 2;
+        grid-row-end: 5;
         grid-column: 1 / 2;
       }
       
       #item4 {
-        grid-row: 2 / 3;
+        grid-row-start: 2;
+        grid-row-end: 5;
         grid-column: 2 / 3;
       }
       
@@ -298,7 +300,8 @@ var selectedSingers = []; // 선택된 가수 이름을 저장할 배열 선언
 	
 function changeClickedName(li) {
 	input.value = ""; // input 초기화.
-	addLi(); // 모든 가수 보여주기
+	options.innerHTML = ""
+ 	addLi();  // 모든 가수 보여주기
 	wrapper.classList.remove('active'); // classList 사용해서 active 클래스명 삭제.
 	select.firstElementChild.innerText = li.innerText; // 선택된 옵션 값이 선택영역에 적용되도록 함
 
@@ -318,7 +321,6 @@ function changeClickedName(li) {
 	$("#singerlist").empty();
 	for (let i = 0; i < selectedSingers.length; i++) {
 		$("#singerlist").append(selectedSingers[i] + "<br>");
-
 	}
 }
 
@@ -328,7 +330,8 @@ var selectedGenre = []; // 선택된 가수 이름을 저장할 배열 선언
 
 function changeClickedGenreName(gli) {
 	inputgenre.value = ""; // input 초기화.
-	addgenreLi(); // 모든 가수 보여주기
+	optionsgenre.innerHTML = ""
+ 	addgenreLi(); 
 	wrappergenre.classList.remove('active'); // classList 사용해서 active 클래스명 삭제.
 	selectgenre.firstElementChild.innerText = gli.innerText; // 선택된 옵션 값이 선택영역에 적용되도록 함
 
@@ -347,16 +350,16 @@ function changeClickedGenreName(gli) {
 	$("#genrelist").empty();
 	for (let i = 0; i < selectedGenre.length; i++) {
 		$("#genrelist").append(selectedGenre[i] + "<br>");
-
 	}
-
+	
 }
 
 $("#wrapper").click(function(event) {
     // 오직 #select 요소 또는 그 자식 요소들이 클릭되었을 때만 실행
+    	options.innerHTML = ""
     if (event.target === select || select.contains(event.target)) {
         wrapper.classList.toggle('active');
-        addLi(); // 목록을 다시 로드
+        addLi();   // 목록을 다시 로드
     }
 });
 
@@ -376,14 +379,17 @@ $("#filter").keyup(function(){
 	} else {
 		//사용자 입력값이 존재하지않는 경우
 		options.innerHTML = "";//조회아이템이 없는 경우 보여주는 태그 비워주고
-		addLi();
+ 		addLi(); 
 	}
 });
 
 
-$("#wrappergenre").click(function(){
+$("#wrappergenre").click(function(event){
+	optionsgenre.innerHTML = ""
+		if (event.target === selectgenre || selectgenre.contains(event.target)) {
 		wrappergenre.classList.toggle('active');
-		addgenreLi();
+ 		addgenreLi(); 
+		}
 });
 
 
@@ -404,7 +410,7 @@ $("#filtergenre").keyup(function(){
 	} else {
 		//사용자 입력값이 존재하지않는 경우
 		optionsgenre.innerHTML = "";//조회아이템이 없는 경우 보여주는 태그 비워주고
-		addgenreLi();
+ 		addgenreLi(); 
 	}
 });
 
@@ -427,6 +433,7 @@ $("#favbtn").click(function(){
 				data: { 'user_id': user_id },
 				success: function(){
 					console.log('메인 추천 페스티벌 업뎃됨');
+					location.href="main.jsp";
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 		            console.log('tab failed: ' + textStatus + ' ' + errorThrown);}

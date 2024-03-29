@@ -232,7 +232,7 @@ session.setMaxInactiveInterval(120*60);
 
 $(document).ready(function (){
 	var fes_idx = $('#fes_idx').val();
-	var imgroute = "./img/"
+	var imgroute = "/tomcatImg/"
 	$.ajax({
 		url : 'ReviewListCon',
 		type : 'get',
@@ -399,7 +399,7 @@ $(document).ready(function (){
 	        success:function(){
 	            	console.log("삭제완료");
 	            	 var fes_idx = $('#fes_idx').val();
-	                 var imgroute = "./img/";
+	                 var imgroute = "/tomcatImg/";
 	                 $.ajax({
 	                     url: 'ReviewListCon',
 	                     type: 'GET',
@@ -447,7 +447,7 @@ $(document).ready(function (){
 			data:{'b_idx':b_idx, 'user_id':user_id},
 			success:function(){
 				var fes_idx = $('#fes_idx').val();
-                var imgroute = "./img/";
+                var imgroute = "/tomcatImg/";
                 $.ajax({
                     url: 'ReviewListCon',
                     type: 'GET',
@@ -657,23 +657,7 @@ $(document).ready(function (){
 
 
 	<script>
-/* 	
-	$(document).on('click', '.like_btn', function() {
-		var b_idx= $(this).data('post-id');
-		$.ajax({
-			url:"LikesCon",
-			type:'GET',
-			data:{'b_idx':b_idx, 'user_id':user_id},
-			success:function(){
-				refreshReviews();
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-                console.log('Upload failed: ' + textStatus + ' ' + errorThrown);
-            }
-		}); //ajax 끝
-	}); // 좋아요버튼 끝 */
-	
-	
+
 	
 	// 리뷰 작성
 	$(document).ready(function() {
@@ -708,7 +692,7 @@ $(document).ready(function (){
     // 리뷰 목록 새로고침 함수
     function refreshReviews() {
         var fes_idx = $('#fes_idx').val();
-        var imgroute = "./img/";
+        var imgroute = "/tomcatImg/";
         $.ajax({
             url: 'ReviewListCon',
             type: 'GET',
