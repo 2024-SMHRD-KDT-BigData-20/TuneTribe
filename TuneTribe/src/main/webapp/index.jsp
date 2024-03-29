@@ -60,6 +60,7 @@ opacity: 0.5;
 </head>
 <body class="is-preload">
 
+	<!-- <수정한 척> -->
 	<!-- Wrapper -->
 	<div id="wrapper">
 
