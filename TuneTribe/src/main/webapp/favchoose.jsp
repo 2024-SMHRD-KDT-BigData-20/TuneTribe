@@ -6,6 +6,7 @@
 UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 
 System.out.println("[favchoose]");
+// 수정한 척 커밋
 %>
 
 <html>
