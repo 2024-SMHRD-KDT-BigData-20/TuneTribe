@@ -127,8 +127,8 @@ System.out.println("[favchoose]");
       .grid-container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 100px, minmax(100px, auto);
-        height: 70vh;
+        grid-template-rows: 200px, auto;
+        height: 80vh;
         margin: 0;
         padding: 0;
       }
@@ -225,55 +225,53 @@ var genres =[];
 <body>
 
 	<div class="grid-container">
-      <div class="grid-item" id="item1">
-        <h3 class="text-white mb-5">선호 가수 목록</h3>
-		<p class="text-white mb-5" id="singerlist"></p>
-      </div>
-      <div class="grid-item" id="item2">
-        <h3 class="text-white mb-5">선호 장르 목록</h3>
-		<p class="text-white mb-5" id="genrelist"></p>
-      </div>
-      <div class="grid-item" id="item3">
-        <div class="wrapper" id="wrapper" style="float:left;">
-		<div class="select" id="select">
-			<span>선호가수를 선택해주세요</span>
-			<span class="material-icons">expand_more</span>
-		</div>
-		<div class="content">
-		<div class="search-box">
-			<span class="material-icons">search</span>
-			<input class="filter" id="filter" type="text" placeholder="검색">
-		</div>
-		<ul class="options" id="options">
-		</ul>
-		</div>
-		</div>
-      </div>
-      <div class="grid-item" id="item4">
-        <div class="wrapper" id="wrappergenre" style="float:left;">
-			<div class="select" id="selectgenre">
-			<span>선호장르를 선택해주세요</span> <span class="material-icons">expand_more</span>
+		<div class="grid-item" id="item1">
+        	<h3 class="text-white mb-5">선호 가수 목록</h3>
+			<p class="text-white mb-5" id="singerlist"></p>
+      	</div>
+    	<div class="grid-item" id="item2">
+        	<h3 class="text-white mb-5">선호 장르 목록</h3>
+			<p class="text-white mb-5" id="genrelist"></p>
+      	</div>
+      	<div class="grid-item" id="item3">
+        	<div class="wrapper" id="wrapper" style="float:left;">
+				<div class="select" id="select">
+					<span>선호가수를 선택해주세요</span>
+					<span class="material-icons">expand_more</span>
+				</div>
+				<div class="content">
+					<div class="search-box">
+						<span class="material-icons">search</span>
+						<input class="filter" id="filter" type="text" placeholder="검색" style="color:black;!important">
+					</div>
+					<ul class="options" id="options">
+					</ul>
+				</div>
 			</div>
-			<!--select-->
-			<div class="content">
-			<div class="search-box">
-				<span class="material-icons">search</span> <input class="filter"
-					id="filtergenre" type="text" placeholder="검색">
-			</div>
-			<!--search box-->
-			<ul class="options" id="optionsgenre">
-			</ul>
 		</div>
-		<!--content-->
-	</div>
-      </div>
+      	<div class="grid-item" id="item4">
+        	<div class="wrapper" id="wrappergenre" style="float:left;">
+				<div class="select" id="selectgenre">
+					<span>선호장르를 선택해주세요</span>
+					<span class="material-icons">expand_more</span>
+				</div>
+				<div class="content">
+					<div class="search-box">
+						<span class="material-icons">search</span>
+						<input class="filter" id="filtergenre" type="text" placeholder="검색" style="color:black;!important">
+					</div>
+					<ul class="options" id="optionsgenre">
+					</ul>
+				</div>
+			</div>
+      	</div>
     </div>
 
 
-	<hr>
+	<hr style="color:white;!important">
 	<br>
 	
-	<div style="float:left;">
+	<div style="float:center;">
 	<button id="favbtn">저장</button>
 	</div>
 
@@ -330,7 +328,7 @@ var selectedGenre = []; // 선택된 가수 이름을 저장할 배열 선언
 
 function changeClickedGenreName(gli) {
 	inputgenre.value = ""; // input 초기화.
-	addLi(); // 모든 가수 보여주기
+	addgenreLi(); // 모든 가수 보여주기
 	wrappergenre.classList.remove('active'); // classList 사용해서 active 클래스명 삭제.
 	selectgenre.firstElementChild.innerText = gli.innerText; // 선택된 옵션 값이 선택영역에 적용되도록 함
 
@@ -354,9 +352,12 @@ function changeClickedGenreName(gli) {
 
 }
 
-$("#wrapper").click(function(){
-	wrapper.classList.toggle('active');
-	addLi();
+$("#wrapper").click(function(event) {
+    // 오직 #select 요소 또는 그 자식 요소들이 클릭되었을 때만 실행
+    if (event.target === select || select.contains(event.target)) {
+        wrapper.classList.toggle('active');
+        addLi(); // 목록을 다시 로드
+    }
 });
 
 $("#filter").keyup(function(){
@@ -381,8 +382,8 @@ $("#filter").keyup(function(){
 
 
 $("#wrappergenre").click(function(){
-	wrappergenre.classList.toggle('active');
-	addgenreLi();
+		wrappergenre.classList.toggle('active');
+		addgenreLi();
 });
 
 

@@ -294,7 +294,7 @@ $(document).ready(function (){
 	                		modalContent += "<div style='border: 1px solid darkgray; border-radius: 5px; padding-top: 15px;'><span class=\"text-black mb-3\" align=\"center\">" + res_each_post.b_content + "</span></div>";
 	                		// 이미지
 	        				var imgPath = imgroute + res_each_post.b_file;
-	        				modalContent += '<img src="' + imgPath + '" alt="" class="img-fluid"></td></tr>';
+	        				modalContent += '<img src="' + imgPath + '" alt="" class="img-fluid"></td></tr><tr><td colspan=2>&nbsp;</td></tr>';
 	        				
 	                // 댓글들 보이기
 		            for(let j=0; j<res_cmt.length; j++){
@@ -583,7 +583,7 @@ $(document).ready(function (){
 
 									<div style="display: flex; justify-content: center;">
 										<input type="text" id="reviewtext"
-											style="width: 400px; height: 150px;">
+											style="width: 80%; height: 100px; color:black;!important">
 									</div>
 									<div>
 										<label for="file" style="height: 50px; width: 100px;" align="center" class="tempbtn">

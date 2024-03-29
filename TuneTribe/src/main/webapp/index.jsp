@@ -93,7 +93,7 @@ opacity: 0.5;
 							<label for="user_id">ID</label> <input type="text" name="user_id" />
 						</div>
 						<div class="field">
-							<label for="user_pw">PW</label> <input type="text" name="user_pw" />
+							<label for="user_pw">PW</label> <input type="password" name="user_pw" />
 						</div>
 					</div>
 					<ul class="actions">

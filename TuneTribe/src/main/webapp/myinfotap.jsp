@@ -51,7 +51,7 @@ UsersVO login_vo = (UsersVO) session.getAttribute("login_vo");
 				</tr>
 				<tr>
 					<td align="right" style="color:white;!important">PW&nbsp;&nbsp;&nbsp;</td>
-					<td><input type="text" name="user_pw" id="user_pw" style="color:black;!important"/></td>
+					<td><input type="password" name="user_pw" id="user_pw" style="color:black;!important"/></td>
 				</tr>
 				<tr>
 					<td align="center" colspan=2><input type="button" id="logincheckbtn" value="로그인"></td>
