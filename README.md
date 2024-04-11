@@ -77,7 +77,7 @@
 ![20240329 ERD](https://github.com/2024-SMHRD-KDT-BigData-20/TuneTribe/assets/148893093/ccfb5679-37eb-4ccd-9786-4e60fa695696)
 <br><br>
 
-## 유스케이스 다이어그램램<br>
+## 유스케이스 다이어그램<br>
 ![image](https://github.com/2024-SMHRD-KDT-BigData-20/TuneTribe/assets/148893093/cb900851-f56b-4baa-b27d-cc235d8c07c8)
 <br><br><br>
 
@@ -155,21 +155,21 @@
     <td align="center"><img src="https://pbs.twimg.com/media/B-n6uPYUUAAZSUx.png" width="100" height="100"/></td>
   </tr>
   <tr>
-    <td align="center"><strong>홍O동</strong></td>
-    <td align="center"><strong>홍O동</strong></td>
-    <td align="center"><strong>홍O동</strong></td>
-    <td align="center"><strong>홍O동</strong></td>
+    <td align="center"><strong>김어진</strong></td>
+    <td align="center"><strong>이정주</strong></td>
+    <td align="center"><strong>이종명</strong></td>
+    <td align="center"><strong>정희헌</strong></td>
   </tr>
   <tr>
-    <td align="center"><b>Frontend</b></td>
-    <td align="center"><b>Frontend</b></td>
-    <td align="center"><b>Backend</b></td>
+    <td align="center"><b>Frontend/Backend</b></td>
+    <td align="center"><b>Frontend/Backend</b></td>
+    <td align="center"><b>Database</b></td>
     <td align="center"><b>Backend</b></td>
   </tr>
   <tr>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
-    <td align="center"><a href="https://github.com/자신의username작성해주세요" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/naomi-kim9" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/lliillllI" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/yeejongmyung" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/HUI-HEON" target='_blank'>github</a></td>
   </tr>
 </table>
